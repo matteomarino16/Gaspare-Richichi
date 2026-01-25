@@ -207,7 +207,11 @@ main{ padding-top: var(--topbarH); }
 .footer__inner{ max-width: 880px; color: var(--muted); }
 
 /* Overlay */
-.overlay[hidden]{ display:none; }
+.overlay[hidden]{
+  display: block; /* Override default display:none to allow transitions */
+  visibility: hidden;
+  pointer-events: none;
+}
 .overlay{ position: fixed; inset: 0; z-index: 60; }
 .overlay__backdrop{
   position:absolute; inset:0;
@@ -267,14 +271,12 @@ main{ padding-top: var(--topbarH); }
 
 /* 3. Overlay Animation */
 .overlay {
-  display: block !important; /* Override hidden attribute behavior controlled by CSS */
+  display: block;
   pointer-events: none;
   transition: visibility 0s 0.4s; /* delay visibility toggle */
   visibility: hidden;
 }
-.overlay[hidden] {
-  /* keep it hidden but accessible to transition */
-}
+
 .overlay:not(.open) .overlay__backdrop {
   opacity: 0;
 }
