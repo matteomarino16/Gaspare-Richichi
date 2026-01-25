@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gaspare Richichi Design</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">Gaspare Richichi Design</div>
+    <nav class="nav">
+      <a href="#projects" class="btn">Progetti</a>
+      <button id="aboutBtn" class="btn btn--primary" type="button">About</button>
+    </nav>
+  </header>
+
+  <!-- HERO: scroll verticale normale -->
+  <main>
+    <section class="hero">
+      <div class="hero__inner reveal">
+        <h1>Gaspare Richichi Design</h1>
+        <p>
+          Intro. Scorri verso il basso: quando arrivi ai progetti,
+          la sezione si “pinna” e i progetti scorrono lateralmente mentre tu continui lo scroll.
+        </p>
+        <div class="hero__meta">
+          <span class="pill">Designer</span>
+          <span class="pill pill--muted">Intirior design</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="spacer">
+      <div class="spacer__inner reveal">
+        <h2>Sezione verticale</h2>
+        <p>
+          Contenuto verticale prima dei progetti.  per fsr veder che la pagina è “normale”.
+        </p>
+      </div>
+    </section>
+
+    <!-- PROGETTI: pinned section -->
+    <section id="projects" class="hscroll">
+      <div class="hscroll__sticky">
+        <div class="hscroll__head reveal">
+          <h2>Progetti</h2>
+          <p>Continua a scorrere verso il basso: qui i contenuti si muovono lateralmente.</p>
+        </div>
+
+        <div class="hscroll__rail" id="rail" aria-label="Galleria progetti orizzontale">
+          <article class="card reveal">
+            <div class="card__meta">
+              <span class="pill">2026</span><span class="pill pill--muted">UI / Motion</span>
+            </div>
+            <h3>Project 01</h3>
+            <p>Descrizione breve. Sostituisci con contenuti reali.</p>
+            <a class="link" href="#">Apri</a>
+          </article>
+
+          <article class="card reveal">
+            <div class="card__meta">
+              <span class="pill">2025</span><span class="pill pill--muted">Web</span>
+            </div>
+            <h3>Project 02</h3>
+            <p>Descrizione breve. Sostituisci con contenuti reali.</p>
+            <a class="link" href="#">Apri</a>
+          </article>
+
+          <article class="card reveal">
+            <div class="card__meta">
+              <span class="pill">2024</span><span class="pill pill--muted">Product</span>
+            </div>
+            <h3>Project 03</h3>
+            <p>Descrizione breve. Sostituisci con contenuti reali.</p>
+            <a class="link" href="#">Apri</a>
+          </article>
+
+          <article class="card reveal">
+            <div class="card__meta">
+              <span class="pill">2023</span><span class="pill pill--muted">Brand</span>
+            </div>
+            <h3>Project 04</h3>
+            <p>Descrizione breve. Sostituisci con contenuti reali.</p>
+            <a class="link" href="#">Apri</a>
+          </article>
+
+          <article class="card reveal">
+            <div class="card__meta">
+              <span class="pill">2022</span><span class="pill pill--muted">Research</span>
+            </div>
+            <h3>Project 05</h3>
+            <p>Descrizione breve. Sostituisci con contenuti reali.</p>
+            <a class="link" href="#">Apri</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dopo: scroll verticale normale riprende -->
+    <section class="spacer spacer--after">
+      <div class="spacer__inner reveal">
+        <h2>Sezione verticale dopo i progetti</h2>
+        <p>
+          Quando finisce la corsa orizzontale, la pagina torna a scrollare normalmente verso il basso.
+        </p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__inner reveal">
+        <p>Footer</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Overlay About -->
+  <div id="overlay" class="overlay" hidden>
+    <div class="overlay__backdrop" data-close></div>
+    <div class="overlay__panel" role="dialog" aria-modal="true" aria-label="About">
+      <div class="overlay__head">
+        <h2>About</h2>
+        <button class="btn" type="button" data-close>Close</button>
+      </div>
+      <p>
+        Inserisci qui bio, contatti, ecc.
+      </p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

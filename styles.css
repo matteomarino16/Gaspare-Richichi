@@ -1,0 +1,297 @@
+ :root{
+  --bg:#fff;
+  --fg:#0f172a;
+  --muted: rgba(15,23,42,.65);
+  --line: rgba(15,23,42,.12);
+  --glass: rgba(255,255,255,.78);
+
+  --topbarH: 66px;
+  --pad: 24px; /* Increased padding for better framing */
+  --gap: 100px; /* Larger gap to separate projects distinctly */
+
+  --cardW: calc(100vw - (var(--pad) * 2)); /* Full width minus padding */
+  --cardH: 100%; /* Fill the rail height */
+  --radius: 22px;
+
+  --shadow: 0 14px 46px rgba(0,0,0,.12);
+}
+
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+.topbar{
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--topbarH);
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  padding: 0 var(--pad);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  z-index: 30;
+}
+
+.brand{
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.nav{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.btn{
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.9);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font: inherit;
+  cursor: pointer;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.btn--primary{
+  background: rgba(15,23,42,.92);
+  border-color: rgba(15,23,42,.28);
+  color: #fff;
+}
+
+main{ padding-top: var(--topbarH); }
+
+/* HERO / sections verticali */
+.hero{
+  min-height: calc(100vh - var(--topbarH));
+  display:flex;
+  align-items: center;
+  padding: 56px var(--pad);
+}
+.hero__inner{
+  max-width: 880px;
+}
+.hero h1{
+  margin: 0 0 12px 0;
+  font-size: clamp(34px, 4.8vw, 58px);
+  letter-spacing: -0.02em;
+}
+.hero p{
+  margin: 0 0 18px 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.hero__meta{ display:flex; gap:10px; flex-wrap: wrap; }
+
+.spacer{
+  padding: 72px var(--pad);
+  border-top: 1px solid var(--line);
+}
+.spacer__inner{ max-width: 880px; }
+.spacer h2{ margin: 0 0 12px 0; }
+.spacer p{ margin: 0; color: var(--muted); line-height: 1.6; }
+
+/* Pills */
+.pill{
+  display:inline-flex;
+  align-items:center;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.88);
+  font-size: 12px;
+}
+.pill--muted{ color: var(--muted); }
+
+/* ===== Sezione pinned orizzontale ===== */
+.hscroll{
+  /* l'altezza viene calcolata via JS per creare lo “spazio” di scroll */
+  position: relative;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.hscroll__sticky{
+  position: sticky;
+  top: var(--topbarH);
+  height: calc(100vh - var(--topbarH));
+  overflow: hidden; /* importante: nascondi overflow mentre trasliamo */
+  background: var(--bg);
+}
+
+.hscroll__head{
+  padding: 22px var(--pad) 10px var(--pad);
+  max-width: 880px;
+}
+.hscroll__head h2{
+  margin: 0 0 6px 0;
+  font-size: 22px;
+}
+.hscroll__head p{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* La rail è una riga orizzontale che trasliamo in X */
+.hscroll__rail{
+  display: flex;
+  gap: var(--gap);
+  padding: 16px var(--pad) 40px var(--pad);
+  height: calc(100% - 86px);
+  align-items: center;
+
+  will-change: transform;
+  transform: translate3d(0,0,0);
+}
+
+/* Card */
+.card{
+  flex: 0 0 var(--cardW);
+  height: var(--cardH);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: rgba(15,23,42,.03);
+  padding: 4vw; /* Responsive padding */
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+  
+  /* Center content for single-view impact */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+}
+
+.card__meta{
+  display:flex;
+  gap:10px;
+  margin-bottom: 24px; /* More breathing room */
+}
+.card h3{
+  margin: 0 0 16px 0;
+  font-size: clamp(32px, 5vw, 64px); /* Larger titles */
+  letter-spacing: -0.02em;
+}
+.card p{
+  margin: 0 0 32px 0;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 50ch; /* Narrower reading line for elegance */
+  font-size: clamp(16px, 1.2vw, 20px);
+}
+.link{
+  font-size: 18px;
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(15,23,42,.25);
+  padding-bottom: 2px;
+}
+
+/* Footer */
+.footer{
+  border-top: 1px solid var(--line);
+  padding: 36px var(--pad);
+}
+.footer__inner{ max-width: 880px; color: var(--muted); }
+
+/* Overlay */
+.overlay[hidden]{ display:none; }
+.overlay{ position: fixed; inset: 0; z-index: 60; }
+.overlay__backdrop{
+  position:absolute; inset:0;
+  background: rgba(0,0,0,.25);
+  backdrop-filter: blur(12px);
+}
+.overlay__panel{
+  position:absolute;
+  top: calc(var(--topbarH) + 14px);
+  right: var(--pad);
+  width: min(560px, calc(100vw - (var(--pad) * 2)));
+  background:#fff;
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+.overlay__head{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap:12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 10px;
+}
+
+/* Reduced motion: niente “smooth” (ma funziona uguale) */
+@media (prefers-reduced-motion: reduce){
+  .hscroll__rail{ will-change: auto; }
+  .reveal { transition: none !important; opacity: 1 !important; transform: none !important; }
+}
+
+/* ===== Animazioni Extra ===== */
+
+/* 1. Scroll Reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 2. Card Hover */
+.card {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+}
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  border-color: var(--fg);
+}
+
+/* 3. Overlay Animation */
+.overlay {
+  display: block !important; /* Override hidden attribute behavior controlled by CSS */
+  pointer-events: none;
+  transition: visibility 0s 0.4s; /* delay visibility toggle */
+  visibility: hidden;
+}
+.overlay[hidden] {
+  /* keep it hidden but accessible to transition */
+}
+.overlay:not(.open) .overlay__backdrop {
+  opacity: 0;
+}
+.overlay:not(.open) .overlay__panel {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+}
+
+.overlay.open {
+  visibility: visible;
+  pointer-events: auto;
+  transition: visibility 0s 0s;
+}
+
+.overlay__backdrop {
+  transition: opacity 0.4s ease;
+}
+.overlay__panel {
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
