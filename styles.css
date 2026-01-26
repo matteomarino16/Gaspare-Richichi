@@ -1,12 +1,12 @@
  :root{
   --bg:#fff;
-  --fg:#0f172a;
-  --muted: rgba(15,23,42,.65);
-  --line: rgba(15,23,42,.12);
-  --glass: rgba(255,255,255,.78);
+  --fg:#000000; /* Pure black for sharper contrast */
+  --muted: rgba(0,0,0,.65);
+  --line: rgba(0,0,0,.12);
+  --glass: rgba(255,255,255,.95); /* More opaque, almost solid white */
 
   --topbarH: 66px;
-  --pad: 24px; /* Increased padding for better framing */
+  --pad: 40px; /* Increased padding as per design */
   --gap: 100px; /* Larger gap to separate projects distinctly */
 
   --cardW: calc(100vw - (var(--pad) * 2)); /* Full width minus padding */
@@ -33,9 +33,11 @@ body{
   align-items:center;
   justify-content: space-between;
   padding: 0 var(--pad);
-  background: var(--glass);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.65); /* High transparency for liquid feel */
+  backdrop-filter: blur(20px) saturate(180%); /* Strong blur + saturation for glass effect */
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,0.3); /* Glassy border edge */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03); /* Subtle depth */
   z-index: 30;
 }
 
@@ -68,9 +70,62 @@ body{
   color: #fff;
 }
 
+.btn-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 main{ padding-top: var(--topbarH); }
 
-/* HERO / sections verticali */
+/* Mobile specific adjustment: Fit to viewport */
+@media (max-width: 767px) {
+  .hero {
+    height: calc(100vh - var(--topbarH)); /* Force full viewport height */
+    padding: 20px var(--pad); /* Reduce padding */
+    align-items: center;
+  }
+  .hero__inner {
+    flex-direction: column;
+    height: 100%;
+    justify-content: center; /* Center content vertically */
+    gap: 24px; /* Reduced gap */
+  }
+  .hero__img {
+     order: -1;
+     margin: 0;
+     flex: 1 1 auto; /* Allow growing to fill space */
+     display: flex;
+     justify-content: center;
+     overflow: hidden;
+   }
+   .hero__photo {
+     max-height: 70vh; /* Increased from 50vh */
+     width: auto;
+     max-width: 100%;
+     object-fit: contain;
+   }
+   .hero__content {
+     order: 2;
+     flex: 0 0 auto;
+     text-align: center;
+   }
+   .hero__title {
+     font-size: clamp(20px, 4vh, 24px); /* Much smaller text */
+   }
+}
+
+.hero__photo {
+  display: block;
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+}
 .hero{
   min-height: calc(100vh - var(--topbarH));
   display:flex;
@@ -78,12 +133,44 @@ main{ padding-top: var(--topbarH); }
   padding: 56px var(--pad);
 }
 .hero__inner{
-  max-width: 880px;
+  max-width: 1200px; /* Increased max-width for desktop layout */
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* Mobile first: stack */
+  gap: 40px;
 }
-.hero h1{
-  margin: 0 0 12px 0;
-  font-size: clamp(34px, 4.8vw, 58px);
+
+/* Desktop layout */
+@media (min-width: 768px) {
+  .hero__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .hero__content {
+    flex: 1;
+    order: 1; /* Text first */
+  }
+  .hero__img {
+    flex: 0 0 450px; /* Fixed width for image container on desktop */
+    order: 2; /* Image second */
+    margin-bottom: 0;
+  }
+}
+
+.hero__img {
+  margin-bottom: 32px;
+}
+@media (min-width: 768px) {
+  .hero__img { margin-bottom: 0; }
+}
+
+.hero__title{
+  margin: 0;
+  font-size: 66px; /* ~50pt */
+  line-height: 1.05; /* ~52.5pt */
   letter-spacing: -0.02em;
+  font-weight: 400; /* Regular weight as seen in mockup */
 }
 .hero p{
   margin: 0 0 18px 0;
@@ -220,23 +307,55 @@ main{ padding-top: var(--topbarH); }
 }
 .overlay__panel{
   position:absolute;
-  top: calc(var(--topbarH) + 14px);
-  right: var(--pad);
-  width: min(560px, calc(100vw - (var(--pad) * 2)));
+  top: 0;
+  right: 0;
+  width: 100%; /* Full width on mobile/desktop or just large panel */
+  max-width: 680px;
+  height: 100vh; /* Full height */
   background:#fff;
-  border-radius: 18px;
-  border: 1px solid rgba(0,0,0,.12);
-  box-shadow: var(--shadow);
-  padding: 16px;
+  border-left: 1px solid rgba(0,0,0,.05); /* Very subtle border only on left */
+  box-shadow: none; /* No shadow */
+  padding: 40px var(--pad);
+  display: flex;
+  flex-direction: column;
 }
 .overlay__head{
   display:flex;
   align-items:center;
-  justify-content: space-between;
-  gap:12px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 10px;
+  justify-content: flex-end; /* Align close button to right */
+  padding-bottom: 40px;
+  min-height: var(--topbarH);
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: flex-start; /* Align text left */
+  justify-content: center;
+  flex: 1; /* Take available space */
+}
+.menu-link {
+  font-size: 32px; /* Smaller font (was 48px) */
+  text-decoration: none;
+  color: var(--fg);
+  font-weight: 400;
+  transition: opacity 0.2s;
+  letter-spacing: -0.02em;
+}
+.menu-link:hover {
+  opacity: 0.6;
+}
+
+/* Mobile adjustments for huge menu */
+@media (max-width: 767px) {
+  .menu-link {
+    font-size: 24px; /* Smaller mobile font (was 32px) */
+  }
+  .overlay__panel {
+    width: calc(100vw - (var(--pad) * 2));
+    padding: 24px;
+  }
 }
 
 /* Reduced motion: niente “smooth” (ma funziona uguale) */

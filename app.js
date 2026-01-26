@@ -11,7 +11,7 @@ const sticky = document.querySelector(".hscroll__sticky");
 const rail = document.getElementById("rail");
 
 const overlay = document.getElementById("overlay");
-const aboutBtn = document.getElementById("aboutBtn");
+const menuBtn = document.getElementById("menuBtn");
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -100,9 +100,9 @@ function closeOverlay() {
     }
   }, 400);
 }
-aboutBtn.addEventListener("click", openOverlay);
+if(menuBtn) menuBtn.addEventListener("click", openOverlay);
 overlay.addEventListener("click", (e) => {
-  if (e.target.matches("[data-close]")) closeOverlay();
+  if (e.target.closest("[data-close]")) closeOverlay();
 });
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && overlay.classList.contains("open")) closeOverlay();

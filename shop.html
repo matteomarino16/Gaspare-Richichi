@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shop - Gaspare Richichi Design</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">Gaspare Richichi Design</div>
+    <nav class="nav">
+      <button id="menuBtn" class="btn-icon" type="button" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="spacer">
+      <div class="spacer__inner reveal">
+        <h1 style="font-size: 42px; margin-bottom: 20px;">Shop</h1>
+        <p>Coming soon.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__inner reveal">
+        <p>&copy; 2026 gasparerichichidesign.com</p>
+        <p style="margin-top: 8px; font-size: 13px;">Web by <a href="https://www.instagram.com/_matteomarino" target="_blank" style="color: inherit; text-decoration: none;">Matteo Marino</a></p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Overlay Menu (duplicato per consistenza navigazione) -->
+  <div id="overlay" class="overlay" hidden>
+    <div class="overlay__backdrop" data-close></div>
+    <div class="overlay__panel overlay__panel--menu" role="dialog" aria-modal="true" aria-label="Menu">
+      <div class="overlay__head">
+        <div class="brand"></div>
+        <button class="btn-icon" type="button" data-close>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <nav class="menu-list">
+        <a href="index.html" class="menu-link">Home</a>
+        <a href="index.html#chi-sono" class="menu-link">Chi sono</a>
+        <a href="index.html#servizi" class="menu-link">Servizi</a>
+        <a href="index.html#progetti" class="menu-link">Progetti</a>
+        <a href="shop.html" class="menu-link">Shop</a>
+        <a href="index.html#contatti" class="menu-link">Contatti</a>
+      </nav>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

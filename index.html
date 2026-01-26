@@ -11,8 +11,13 @@
   <header class="topbar">
     <div class="brand">Gaspare Richichi Design</div>
     <nav class="nav">
-      <a href="#projects" class="btn">Progetti</a>
-      <button id="aboutBtn" class="btn btn--primary" type="button">About</button>
+      <button id="menuBtn" class="btn-icon" type="button" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
     </nav>
   </header>
 
@@ -20,29 +25,35 @@
   <main>
     <section class="hero">
       <div class="hero__inner reveal">
-        <h1>Gaspare Richichi Design</h1>
-        <p>
-          Intro. Scorri verso il basso: quando arrivi ai progetti,
-          la sezione si “pinna” e i progetti scorrono lateralmente mentre tu continui lo scroll.
-        </p>
-        <div class="hero__meta">
-          <span class="pill">Designer</span>
-          <span class="pill pill--muted">Interior design</span>
+        <div class="hero__content">
+          <h1 class="hero__title">Product, Interior<br>and Graphic designer</h1>
+        </div>
+        <div class="hero__img">
+            <img src="fotohero.jpg" alt="Gaspare Richichi" class="hero__photo">
         </div>
       </div>
     </section>
 
-    <section class="spacer">
+    <section id="chi-sono" class="spacer">
       <div class="spacer__inner reveal">
-        <h2>Sezione verticale</h2>
+        <h2>Chi sono</h2>
         <p>
-          Contenuto verticale prima dei progetti.  per fsr veder che la pagina è “normale”.
+          Breve descrizione biografica.
+        </p>
+      </div>
+    </section>
+
+    <section id="servizi" class="spacer">
+      <div class="spacer__inner reveal">
+        <h2>Servizi</h2>
+        <p>
+          Lista dei servizi offerti.
         </p>
       </div>
     </section>
 
     <!-- PROGETTI: pinned section -->
-    <section id="projects" class="hscroll">
+    <section id="progetti" class="hscroll">
       <div class="hscroll__sticky">
         <div class="hscroll__head reveal">
           <h2>Progetti</h2>
@@ -99,33 +110,45 @@
     </section>
 
     <!-- Dopo: scroll verticale normale riprende -->
-    <section class="spacer spacer--after">
+    <section id="contatti" class="spacer spacer--after">
       <div class="spacer__inner reveal">
-        <h2>Sezione verticale dopo i progetti</h2>
+        <h2>Contatti</h2>
         <p>
-          Quando finisce la corsa orizzontale, la pagina torna a scrollare normalmente verso il basso.
+          Informazioni di contatto.
         </p>
       </div>
     </section>
 
     <footer class="footer">
       <div class="footer__inner reveal">
-        <p>Footer</p>
+        <p>&copy; 2026 gasparerichichidesign.com</p>
+        <p style="margin-top: 8px; font-size: 13px;">web by <a href="https://www.instagram.com/_mkatteomarino" target="_blank" style="color: inherit; text-decoration: none;">Matteo Marino</a></p>
       </div>
     </footer>
   </main>
 
-  <!-- Overlay About -->
+  <!-- Overlay Menu -->
   <div id="overlay" class="overlay" hidden>
     <div class="overlay__backdrop" data-close></div>
-    <div class="overlay__panel" role="dialog" aria-modal="true" aria-label="About">
+    <div class="overlay__panel overlay__panel--menu" role="dialog" aria-modal="true" aria-label="Menu">
       <div class="overlay__head">
-        <h2>About</h2>
-        <button class="btn" type="button" data-close>Close</button>
+        <!-- Optional: branding inside menu or just close button -->
+        <div class="brand"></div>
+        <button class="btn-icon" type="button" data-close>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
       </div>
-      <p>
-        Inserisci qui bio, contatti, ecc.
-      </p>
+      <nav class="menu-list">
+        <a href="#" class="menu-link" data-close>Home</a>
+        <a href="#chi-sono" class="menu-link" data-close>Chi sono</a>
+        <a href="#servizi" class="menu-link" data-close>Servizi</a>
+        <a href="#progetti" class="menu-link" data-close>Progetti</a>
+        <a href="shop.html" class="menu-link">Shop</a>
+        <a href="#contatti" class="menu-link" data-close>Contatti</a>
+      </nav>
     </div>
   </div>
 
