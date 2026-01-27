@@ -567,3 +567,195 @@ main{ padding-top: var(--topbarH); }
 .overlay__panel {
   transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* ===== Service Section Styles ===== */
+.service-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  font-size: clamp(15px, 1.1vw, 18px);
+  line-height: 1.5;
+  color: var(--muted);
+  width: 100%;
+}
+.service-list li {
+  position: relative;
+  padding-left: 14px;
+  margin-bottom: 4px;
+}
+.service-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--fg);
+}
+.service-ideal {
+  font-size: 13px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  width: 100%;
+}
+
+/* ===== Servizi Section Overrides ===== */
+#servizi {
+  /* Cards much smaller to allow multiple items in view */
+  --cardW: 360px;
+  --cardH: auto; /* Let content dictate height instead of stretching */
+}
+
+#servizi .card {
+  aspect-ratio: 9/12; /* A nice vertical rectangular shape */
+  justify-content: flex-start; /* Align content to top */
+  padding: 24px;
+  background: #ffffff; /* White background for better contrast */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+#servizi .card h3 {
+  /* Adjust title size for narrower cards */
+  font-size: 22px;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+  #servizi {
+    --cardW: 85vw; /* On mobile, keep them readable */
+    --cardH: auto;
+  }
+  #servizi .card {
+    aspect-ratio: auto; /* Allow natural flow on mobile */
+    min-height: 400px;
+  }
+}
+
+/* ===== Toolkit Section ===== */
+.toolkit-section {
+  padding: 100px var(--pad);
+  border-bottom: 1px solid var(--line);
+  background: #fafafa; /* Slightly different bg to separate sections */
+}
+.toolkit-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.toolkit-inner h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  margin: 0 0 16px 0;
+}
+.toolkit-desc {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 0 48px 0;
+  line-height: 1.6;
+}
+
+.logo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+}
+
+.tool-item {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.tool-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  border-color: var(--fg);
+}
+
+.tool-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%); /* Elegant monochrome look */
+  opacity: 0.7;
+  transition: all 0.3s;
+}
+.tool-item:hover .tool-logo {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* Placeholder style when no image is present */
+.tool-placeholder {
+  color: var(--line);
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Toolkit Staggered Animation */
+@keyframes fadeUpLogos {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.logo-grid .tool-item.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.logo-grid .tool-item.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeUpLogos 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Ensure hover works after animation */
+.logo-grid .tool-item.reveal.active:hover {
+  transform: translateY(-5px);
+}
+
+/* Stagger Delays */
+.logo-grid .tool-item:nth-child(1) { animation-delay: 0.1s; }
+.logo-grid .tool-item:nth-child(2) { animation-delay: 0.2s; }
+.logo-grid .tool-item:nth-child(3) { animation-delay: 0.3s; }
+.logo-grid .tool-item:nth-child(4) { animation-delay: 0.4s; }
+.logo-grid .tool-item:nth-child(5) { animation-delay: 0.5s; }
+.logo-grid .tool-item:nth-child(6) { animation-delay: 0.6s; }
+.logo-grid .tool-item:nth-child(7) { animation-delay: 0.7s; }
+
+/* Toolkit Staggered Animation */
+@keyframes fadeUpLogos {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.logo-grid .tool-item.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.logo-grid .tool-item.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeUpLogos 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Ensure hover works after animation */
+.logo-grid .tool-item.reveal.active:hover {
+  transform: translateY(-5px);
+}
+
+/* Stagger Delays */
+.logo-grid .tool-item:nth-child(1) { animation-delay: 0.1s; }
+.logo-grid .tool-item:nth-child(2) { animation-delay: 0.2s; }
+.logo-grid .tool-item:nth-child(3) { animation-delay: 0.3s; }
+.logo-grid .tool-item:nth-child(4) { animation-delay: 0.4s; }
+.logo-grid .tool-item:nth-child(5) { animation-delay: 0.5s; }
+.logo-grid .tool-item:nth-child(6) { animation-delay: 0.6s; }
