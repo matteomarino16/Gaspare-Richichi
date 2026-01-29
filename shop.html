@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Shop - Gaspare Richichi Design</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.png" type="image/png">
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -11,6 +13,13 @@
   <header class="topbar">
     <div class="brand">Gaspare Richichi Design</div>
     <nav class="nav">
+      <a href="shop.html" class="btn-icon" aria-label="Shop">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+      </a>
       <button id="menuBtn" class="btn-icon" type="button" aria-label="Menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -22,10 +31,28 @@
   </header>
 
   <main>
-    <section class="spacer">
-      <div class="spacer__inner reveal">
-        <h1 style="font-size: 42px; margin-bottom: 20px;">Shop</h1>
-        <p>Coming soon.</p>
+    <section class="shop-product-section">
+      <h1 class="shop-title reveal" data-i18n="shop_title">Shop</h1>
+      <div class="product-card reveal">
+        <div class="product-status" data-i18n="product_status">su richiesta</div>
+        
+        <div class="product-image-container">
+          <img src="shop/lampada.jpg" alt="Lampada Design" class="product-image">
+        </div>
+        
+        <div class="product-info">
+          <h2 class="product-title" data-i18n="product_lamp_title">LAMPADA DESIGN</h2>
+          <p class="product-material" data-i18n="product_material">100% MADE IN ITALY</p>
+          <p class="product-price">€ 170,00</p>
+          
+          <div class="product-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+
+          <a href="https://ig.me/m/gaspare_richichi" target="_blank" class="dm-button" data-i18n="dm_order">DM FOR ORDER</a>
+        </div>
       </div>
     </section>
 
@@ -51,13 +78,19 @@
         </button>
       </div>
       <nav class="menu-list">
-        <a href="index.html" class="menu-link">Home</a>
-        <a href="index.html#chi-sono" class="menu-link">Chi sono</a>
-        <a href="index.html#servizi" class="menu-link">Servizi</a>
-        <a href="index.html#progetti" class="menu-link">Progetti</a>
-        <a href="shop.html" class="menu-link">Shop</a>
-        <a href="index.html#contatti" class="menu-link">Contatti</a>
+        <a href="index.html" class="menu-link" data-i18n="menu_home">Home</a>
+        <a href="index.html#chi-sono" class="menu-link" data-i18n="menu_about">Chi sono</a>
+        <a href="index.html#servizi" class="menu-link" data-i18n="menu_services">Servizi</a>
+        <a href="index.html#progetti" class="menu-link" data-i18n="menu_projects">Progetti</a>
+        <a href="shop.html" class="menu-link" data-i18n="menu_shop">Shop</a>
+        <a href="index.html#contatti" class="menu-link" data-i18n="menu_contacts">Contatti</a>
       </nav>
+
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="it">IT</button>
+        <span class="lang-sep">/</span>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
     </div>
   </div>
 

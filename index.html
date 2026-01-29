@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Gaspare Richichi Design</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.png" type="image/png">
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -11,6 +13,13 @@
   <header class="topbar">
     <div class="brand">Gaspare Richichi Design</div>
     <nav class="nav">
+      <a href="shop.html" class="btn-icon" aria-label="Shop">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+      </a>
       <button id="menuBtn" class="btn-icon" type="button" aria-label="Menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -26,7 +35,7 @@
     <section class="hero">
       <div class="hero__inner reveal">
         <div class="hero__content">
-          <h1 class="hero__title">Product, Interior<br>and Graphic designer</h1>
+          <h1 class="hero__title" data-i18n="hero_title">Product, Interior<br>and Graphic designer</h1>
         </div>
         <div class="hero__img">
             <img src="fotohero.jpg" alt="Gaspare Richichi" class="hero__photo">
@@ -36,8 +45,8 @@
 
     <section id="chi-sono" class="spacer">
       <div class="spacer__inner reveal">
-        <h2>Chi sono</h2>
-        <p>
+        <h2 data-i18n="about_title">Chi sono</h2>
+        <p data-i18n="about_text">
       Sono Gaspare Richichi, un designer con formazione magistrale specializzato in Product, Interior e Graphic Design.<br>
       Aiuto brand, aziende e privati a trasformare le loro idee in qualcosa di concreto.<br>
       Ogni progetto nasce dall’ascolto, dalla ricerca e dall’attenzione al dettaglio, per arrivare a soluzioni su misura capaci di raccontare una storia e generare valore reale.
@@ -49,8 +58,8 @@
       <div class="hscroll__sticky">
         <div class="hscroll__head reveal">
           <div class="hscroll__head-inner">
-            <h2>Servizi</h2>
-            <p>
+            <h2 data-i18n="services_title">Servizi</h2>
+            <p data-i18n="services_subtitle">
               Soluzioni su misura per ogni esigenza.
             </p>
           </div>
@@ -62,9 +71,9 @@
             <div class="card__meta">
               <span class="pill">30 min</span><span class="pill pill--muted">Free</span>
             </div>
-            <h3>Consulenza Gratuita</h3>
-            <p>Una call conoscitiva per analizzare le tue esigenze e capire come possiamo collaborare.</p>
-            <a class="link" href="#contatti" style="margin-top: auto;">Prenota ora</a>
+            <h3 data-i18n="service_consultation_title">Consulenza Gratuita</h3>
+            <p data-i18n="service_consultation_desc">Una call conoscitiva per analizzare le tue esigenze e capire come possiamo collaborare.</p>
+            <a class="link" href="#contatti" style="margin-top: auto;" data-i18n="book_now">Prenota ora</a>
           </article>
 
           <!-- Card 2: Brand Identity -->
@@ -72,16 +81,16 @@
             <div class="card__meta">
               <span class="pill pill--muted">Branding</span>
             </div>
-            <h3>Brand Identity & Comunicazione</h3>
+            <h3 data-i18n="service_brand_title">Brand Identity & Comunicazione</h3>
             <ul class="service-list">
-              <li>Progettazione logo</li>
-              <li>Sistema di identità visiva</li>
-              <li>Materiali cartacei, packaging, social</li>
-              <li>Palette colori e tipografia</li>
-              <li>Brand book e linee guida</li>
+              <li data-i18n="service_brand_li1">Progettazione logo</li>
+              <li data-i18n="service_brand_li2">Sistema di identità visiva</li>
+              <li data-i18n="service_brand_li3">Materiali cartacei, packaging, social</li>
+              <li data-i18n="service_brand_li4">Palette colori e tipografia</li>
+              <li data-i18n="service_brand_li5">Brand book e linee guida</li>
             </ul>
-            <p class="service-ideal"><strong>Ideale per:</strong> startup, negozi, ristoranti, professionisti, piccoli brand.</p>
-            <a class="link" href="#contatti" style="margin-top: auto;">Prenota ora</a>
+            <p class="service-ideal"><strong data-i18n="ideal_for">Ideale per:</strong> <span data-i18n="service_brand_ideal">startup, negozi, ristoranti, professionisti, piccoli brand.</span></p>
+            <a class="link" href="#contatti" style="margin-top: auto;" data-i18n="book_now">Prenota ora</a>
           </article>
 
           <!-- Card 3: Sito Web -->
@@ -89,16 +98,16 @@
             <div class="card__meta">
               <span class="pill pill--muted">Web Design</span>
             </div>
-            <h3>Progettazione Sito Web</h3>
+            <h3 data-i18n="service_web_title">Progettazione Sito Web</h3>
             <ul class="service-list">
-              <li>Design UI/UX personalizzato</li>
-              <li>Sviluppo Responsive (Mobile/Desktop)</li>
-              <li>Ottimizzazione performance e SEO base</li>
-              <li>Gestione contenuti (CMS)</li>
-              <li>Supporto al lancio</li>
+              <li data-i18n="service_web_li1">Design UI/UX personalizzato</li>
+              <li data-i18n="service_web_li2">Sviluppo Responsive (Mobile/Desktop)</li>
+              <li data-i18n="service_web_li3">Ottimizzazione performance e SEO base</li>
+              <li data-i18n="service_web_li4">Gestione contenuti (CMS)</li>
+              <li data-i18n="service_web_li5">Supporto al lancio</li>
             </ul>
-            <p class="service-ideal"><strong>Ideale per:</strong> professionisti e aziende che vogliono distinguersi online.</p>
-            <a class="link" href="#contatti" style="margin-top: auto;">Prenota ora</a>
+            <p class="service-ideal"><strong data-i18n="ideal_for">Ideale per:</strong> <span data-i18n="service_web_ideal">professionisti e aziende che vogliono distinguersi online.</span></p>
+            <a class="link" href="#contatti" style="margin-top: auto;" data-i18n="book_now">Prenota ora</a>
           </article>
 
           <!-- Card 4: Product Design -->
@@ -106,16 +115,16 @@
             <div class="card__meta">
               <span class="pill pill--muted">Product</span>
             </div>
-            <h3>Progettazione Prodotto</h3>
+            <h3 data-i18n="service_product_title">Progettazione Prodotto</h3>
             <ul class="service-list">
-              <li>Analisi richieste e ricerca</li>
-              <li>Ideazione Concept</li>
-              <li>Sketching e modellazione 3D</li>
-              <li>Render fotorealistici</li>
-              <li>Disegni tecnici e supporto produzione</li>
+              <li data-i18n="service_product_li1">Analisi richieste e ricerca</li>
+              <li data-i18n="service_product_li2">Ideazione Concept</li>
+              <li data-i18n="service_product_li3">Sketching e modellazione 3D</li>
+              <li data-i18n="service_product_li4">Render fotorealistici</li>
+              <li data-i18n="service_product_li5">Disegni tecnici e supporto produzione</li>
             </ul>
-            <p class="service-ideal"><strong>Ideale per:</strong> artigiani, privati, aziende, brand di arredo.</p>
-            <a class="link" href="#contatti" style="margin-top: auto;">Prenota ora</a>
+            <p class="service-ideal"><strong data-i18n="ideal_for">Ideale per:</strong> <span data-i18n="service_product_ideal">artigiani, privati, aziende, brand di arredo.</span></p>
+            <a class="link" href="#contatti" style="margin-top: auto;" data-i18n="book_now">Prenota ora</a>
           </article>
 
           <!-- Card 5: Interior Design -->
@@ -123,17 +132,17 @@
             <div class="card__meta">
               <span class="pill pill--muted">Interior</span>
             </div>
-            <h3>Interni Residenziali e Commerciali</h3>
+            <h3 data-i18n="service_interior_title">Interni Residenziali e Commerciali</h3>
             <ul class="service-list">
-              <li>Rilievo e sviluppo planimetria</li>
-              <li>Layout e ridistribuzione spazi</li>
-              <li>Concept d’interni</li>
-              <li>Scelta arredi e materiali</li>
-              <li>Render fotorealistici ambienti</li>
-              <li>Proposta finale e supporto</li>
+              <li data-i18n="service_interior_li1">Rilievo e sviluppo planimetria</li>
+              <li data-i18n="service_interior_li2">Layout e ridistribuzione spazi</li>
+              <li data-i18n="service_interior_li3">Concept d’interni</li>
+              <li data-i18n="service_interior_li4">Scelta arredi e materiali</li>
+              <li data-i18n="service_interior_li5">Render fotorealistici ambienti</li>
+              <li data-i18n="service_interior_li6">Proposta finale e supporto</li>
             </ul>
-            <p class="service-ideal"><strong>Ideale per:</strong> clienti privati, imprenditori, locali commerciali, agenzie immobiliari.</p>
-            <a class="link" href="#contatti" style="margin-top: auto;">Prenota ora</a>
+            <p class="service-ideal"><strong data-i18n="ideal_for">Ideale per:</strong> <span data-i18n="service_interior_ideal">clienti privati, imprenditori, locali commerciali, agenzie immobiliari.</span></p>
+            <a class="link" href="#contatti" style="margin-top: auto;" data-i18n="book_now">Prenota ora</a>
           </article>
         </div>
       </div>
@@ -143,32 +152,52 @@
     <section id="toolkit" class="toolkit-section">
       <div class="toolkit-inner">
         <div class="logo-grid">
+           <!-- 1. Adobe Illustrator -->
            <div class="tool-item reveal">
-             <img src="programmi/PHOTO-2026-01-27-13-13-56.jpg" alt="Tool Logo 1" class="tool-logo">
+             <img src="programmi/PHOTO-2026-01-27-13-13-57.jpg" alt="Adobe Illustrator" class="tool-logo">
+             <span class="tool-name">Adobe Illustrator</span>
            </div>
            
+           <!-- 2. Adobe Photoshop -->
            <div class="tool-item reveal">
-             <img src="programmi/PHOTO-2026-01-27-13-13-57 2.jpg" alt="Tool Logo 2" class="tool-logo">
+             <img src="programmi/PHOTO-2026-01-27-13-13-56.jpg" alt="Adobe Photoshop" class="tool-logo">
+             <span class="tool-name">Adobe Photoshop</span>
            </div>
            
+           <!-- 3. Figma -->
            <div class="tool-item reveal">
-             <img src="programmi/PHOTO-2026-01-27-13-13-57 3.jpg" alt="Tool Logo 3" class="tool-logo">
+             <img src="programmi/PHOTO-2026-01-27-13-13-57 3.jpg" alt="Figma" class="tool-logo">
+             <span class="tool-name">Figma</span>
            </div>
            
+           <!-- 4. Autocad -->
            <div class="tool-item reveal">
-             <img src="programmi/PHOTO-2026-01-27-13-13-57.jpg" alt="Tool Logo 4" class="tool-logo">
+             <img src="programmi/PHOTO-2026-01-27-13-13-57 2.jpg" alt="Autocad" class="tool-logo">
+             <span class="tool-name">Autocad</span>
            </div>
            
+           <!-- 5. Fusion 360 -->
            <div class="tool-item reveal">
-             <img src="programmi/PHOTO-2026-01-27-13-13-58 2.jpg" alt="Tool Logo 5" class="tool-logo">
+             <img src="programmi/PHOTO-2026-01-27-13-13-58 3.jpg" alt="Fusion 360" class="tool-logo">
+             <span class="tool-name">Fusion 360</span>
            </div>
            
+           <!-- 6. 3DS Studio Max -->
            <div class="tool-item reveal">
-             <img src="programmi/PHOTO-2026-01-27-13-13-58 3.jpg" alt="Tool Logo 6" class="tool-logo">
+             <img src="programmi/PHOTO-2026-01-27-13-13-58 2.jpg" alt="3DS Studio Max" class="tool-logo">
+             <span class="tool-name">3DS Studio Max</span>
+           </div>
+           
+           <!-- 7. Rhinocheros 3D -->
+           <div class="tool-item reveal">
+             <img src="programmi/PHOTO-2026-01-27-13-13-58.jpg" alt="Rhinocheros 3D" class="tool-logo">
+             <span class="tool-name">Rhinocheros 3D</span>
            </div>
 
+           <!-- 8. KeyShot -->
            <div class="tool-item reveal">
-             <img src="programmi/PHOTO-2026-01-27-13-13-58.jpg" alt="Tool Logo 7" class="tool-logo">
+             <img src="programmi/abc49138-aa14-41c9-b7f8-1a421dee8bcd.JPG" alt="KeyShot" class="tool-logo">
+             <span class="tool-name">KeyShot</span>
            </div>
         </div>
       </div>
@@ -179,8 +208,7 @@
       <div class="hscroll__sticky">
         <div class="hscroll__head reveal">
           <div class="hscroll__head-inner">
-            <h2>Progetti</h2>
-            <p>Continua a scorrere verso il basso: qui i contenuti si muovono lateralmente.</p>
+            <h2 data-i18n="projects_title">Progetti</h2>
           </div>
         </div>
 
@@ -190,8 +218,8 @@
               <span class="pill">2026</span><span class="pill pill--muted">UI / Motion</span>
             </div>
             <h3>Project 01</h3>
-            <p>Descrizione breve. Sostituisci con contenuti reali.</p>
-            <a class="link" href="#">Apri</a>
+            <p data-i18n="project_desc_placeholder">Descrizione breve. Sostituisci con contenuti reali.</p>
+            <a class="link" href="#" data-i18n="open_project">Apri</a>
           </article>
 
           <article class="card reveal">
@@ -199,8 +227,8 @@
               <span class="pill">2025</span><span class="pill pill--muted">Web</span>
             </div>
             <h3>Project 02</h3>
-            <p>Descrizione breve. Sostituisci con contenuti reali.</p>
-            <a class="link" href="#">Apri</a>
+            <p data-i18n="project_desc_placeholder">Descrizione breve. Sostituisci con contenuti reali.</p>
+            <a class="link" href="#" data-i18n="open_project">Apri</a>
           </article>
 
           <article class="card reveal">
@@ -208,8 +236,8 @@
               <span class="pill">2024</span><span class="pill pill--muted">Product</span>
             </div>
             <h3>Project 03</h3>
-            <p>Descrizione breve. Sostituisci con contenuti reali.</p>
-            <a class="link" href="#">Apri</a>
+            <p data-i18n="project_desc_placeholder">Descrizione breve. Sostituisci con contenuti reali.</p>
+            <a class="link" href="#" data-i18n="open_project">Apri</a>
           </article>
 
           <article class="card reveal">
@@ -217,8 +245,8 @@
               <span class="pill">2023</span><span class="pill pill--muted">Brand</span>
             </div>
             <h3>Project 04</h3>
-            <p>Descrizione breve. Sostituisci con contenuti reali.</p>
-            <a class="link" href="#">Apri</a>
+            <p data-i18n="project_desc_placeholder">Descrizione breve. Sostituisci con contenuti reali.</p>
+            <a class="link" href="#" data-i18n="open_project">Apri</a>
           </article>
 
           <article class="card reveal">
@@ -226,9 +254,37 @@
               <span class="pill">2022</span><span class="pill pill--muted">Research</span>
             </div>
             <h3>Project 05</h3>
-            <p>Descrizione breve. Sostituisci con contenuti reali.</p>
-            <a class="link" href="#">Apri</a>
+            <p data-i18n="project_desc_placeholder">Descrizione breve. Sostituisci con contenuti reali.</p>
+            <a class="link" href="#" data-i18n="open_project">Apri</a>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CV DOWNLOAD SECTION -->
+    <section id="cv-download" class="cv-section">
+      <div class="cv-inner reveal">
+        <div class="cv-container"> 
+           <a href="#" class="cv-btn" download>
+             <span class="cv-icon-wrapper">
+               <svg 
+                 class="cv-icon" 
+                 aria-hidden="true" 
+                 xmlns="http://www.w3.org/2000/svg" 
+                 fill="none" 
+                 viewBox="0 0 24 24" 
+               > 
+                 <path 
+                   stroke="currentColor" 
+                   stroke-linecap="round" 
+                   stroke-linejoin="round" 
+                   stroke-width="1.5" 
+                   d="M12 19V5m0 14-4-4m4 4 4-4" 
+                 ></path> 
+               </svg> 
+             </span>
+             <span class="cv-text" data-i18n="cv_download_text">Scarica ora i miei progetti</span>
+           </a>
         </div>
       </div>
     </section>
@@ -236,41 +292,41 @@
     <!-- Dopo: scroll verticale normale riprende -->
     <section id="contatti" class="spacer spacer--after">
       <div class="spacer__inner reveal">
-        <h2>Contatti</h2>
+        <h2 data-i18n="contacts_title">Contatti</h2>
         <div class="contact-grid">
           <div class="contact-left-column">
             <div class="contact-info">
-              <p class="contact-intro">Hai un progetto in mente? Scrivimi o vieni a trovarmi.</p>
+              <p class="contact-intro" data-i18n="contacts_intro">Hai un progetto in mente? Scrivimi o vieni a trovarmi.</p>
               <ul class="contact-list">
                 <li>
-                  <a href="mailto:info@gasparerichichi.com">
+                  <a href="mailto:gasparerichichidesign@gmail.com">
                     <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    info@gasparerichichi.com
+                    gasparerichichidesign@gmail.com
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+390000000000">
+                  <a href="tel:+393291274511">
                     <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                    +39 000 000 0000
+                    +39 329 127 4511
                   </a>
                 </li>
                 <li>
                   <span class="contact-item-text">
                     <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                    Via Roma 1, Milano, Italia
+                    Cortile Spano', 45, 90123 Palermo PA
                   </span>
                 </li>
               </ul>
             </div>
             <div class="social-links">
-              <a href="#" aria-label="Instagram">
+              <a href="https://www.instagram.com/gaspare_richichi/" target="_blank" aria-label="Instagram">
                 <svg class="icon-social" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
               </a>
-              <a href="#" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/gaspare-richichi-96595a236?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
                 <svg class="icon-social" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
               </a>
-              <a href="#" aria-label="Facebook">
-                <svg class="icon-social" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              <a href="https://wa.me/393291274511" target="_blank" aria-label="WhatsApp">
+                <svg class="icon-social" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" /></svg>
               </a>
             </div>
           </div>
@@ -278,22 +334,22 @@
           <div class="contact-form-wrapper">
             <form class="contact-form" action="#" method="POST">
               <div class="form-group">
-                <label for="name">Nome e Cognome</label>
+                <label for="name" data-i18n="label_name">Nome e Cognome</label>
                 <input type="text" id="name" name="name" required>
               </div>
               <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email" data-i18n="label_email">Email</label>
                 <input type="email" id="email" name="email" required>
               </div>
               <div class="form-group">
-                <label for="phone">Numero di telefono</label>
+                <label for="phone" data-i18n="label_phone">Numero di telefono</label>
                 <input type="tel" id="phone" name="phone">
               </div>
               <div class="form-group">
-                <label for="message">Messaggio</label>
+                <label for="message" data-i18n="label_message">Messaggio</label>
                 <textarea id="message" name="message" rows="4" required></textarea>
               </div>
-              <button type="submit" class="btn btn--primary">Invia richiesta</button>
+              <button type="submit" class="btn btn--primary" data-i18n="btn_send">Invia richiesta</button>
             </form>
           </div>
         </div>
@@ -302,7 +358,7 @@
 
     <footer class="footer">
       <div class="footer__inner reveal">
-        <p>&copy; 2026 Gasparerichichidesign.com - Tutti i diritti riservati</p>
+        <p>&copy; 2026 Gasparerichichi.com - <span data-i18n="footer_rights">Tutti i diritti riservati</span></p>
         <p style="margin-top: 8px; font-size: 13px;">web by <a href="https://www.instagram.com/_mkatteomarino" target="_blank" style="color: inherit; text-decoration: none;">Matteo Marino</a></p>
       </div>
     </footer>
@@ -323,13 +379,19 @@
         </button>
       </div>
       <nav class="menu-list">
-        <a href="#" class="menu-link" data-close>Home</a>
-        <a href="#chi-sono" class="menu-link" data-close>Chi sono</a>
-        <a href="#servizi" class="menu-link" data-close>Servizi</a>
-        <a href="#progetti" class="menu-link" data-close>Progetti</a>
-        <a href="shop.html" class="menu-link">Shop</a>
-        <a href="#contatti" class="menu-link" data-close>Contatti</a>
+        <a href="#" class="menu-link" data-close data-i18n="menu_home">Home</a>
+        <a href="#chi-sono" class="menu-link" data-close data-i18n="menu_about">Chi sono</a>
+        <a href="#servizi" class="menu-link" data-close data-i18n="menu_services">Servizi</a>
+        <a href="#progetti" class="menu-link" data-close data-i18n="menu_projects">Progetti</a>
+        <a href="shop.html" class="menu-link" data-i18n="menu_shop">Shop</a>
+        <a href="#contatti" class="menu-link" data-close data-i18n="menu_contacts">Contatti</a>
       </nav>
+
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="it">IT</button>
+        <span class="lang-sep">/</span>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
     </div>
   </div>
 
