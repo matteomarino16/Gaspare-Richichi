@@ -65,8 +65,8 @@ body{
 }
 
 .btn--primary{
-  background: rgba(15,23,42,.92);
-  border-color: rgba(15,23,42,.28);
+  background: #000000;
+  border-color: #000000;
   color: #fff;
 }
 
@@ -159,6 +159,7 @@ main{ padding-top: var(--topbarH); }
     flex: 1;
     order: 1; /* Text first (left) */
     padding-bottom: 10px; /* Slight offset from bottom alignment */
+    text-align: left; /* Center text in desktop too */
   }
   .hero__title {
     font-size: 20px; /* Restored to "perfetto" size (was 14px) */
@@ -199,8 +200,8 @@ main{ padding-top: var(--topbarH); }
   padding: 72px var(--pad);
   border-top: 1px solid var(--line);
 }
-.spacer__inner{ max-width: 1200px; margin: 0 auto; }
-.spacer h2{ margin: 0 0 12px 0; }
+.spacer__inner{ max-width: 1200px; margin: 0; text-align: left; }
+.spacer h2{ margin: 0 0 12px 0; font-weight: 400; letter-spacing: -0.02em; }
 .spacer p{ margin: 0; color: var(--muted); line-height: 1.6; }
 
 /* Contact Section */
@@ -229,7 +230,7 @@ main{ padding-top: var(--topbarH); }
 }
 
 .contact-intro {
-  text-align: center;
+  text-align: left;
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 8px;
@@ -369,11 +370,13 @@ main{ padding-top: var(--topbarH); }
 }
 .hscroll__head-inner{
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0;
+  text-align: left;
 }
 .hscroll__head h2{
-  margin: 0 0 6px 0;
-  font-size: 22px;
+  margin: 0 0 12px 0;
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 .hscroll__head p{
   margin: 0;
@@ -703,10 +706,13 @@ main{ padding-top: var(--topbarH); }
 .toolkit-inner {
   max-width: 1200px;
   margin: 0 auto;
+  text-align: left;
 }
 .toolkit-inner h2 {
   font-size: clamp(32px, 4vw, 48px);
   margin: 0 0 16px 0;
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 .toolkit-desc {
   font-size: 18px;
@@ -998,7 +1004,8 @@ main{ padding-top: var(--topbarH); }
   color: var(--fg);
 }
 
-.shop-btn {
+.shop-btn,
+.dm-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1010,9 +1017,12 @@ main{ padding-top: var(--topbarH); }
   font-size: 14px;
   font-weight: 500;
   transition: opacity 0.2s;
+  cursor: pointer;
+  border: none;
 }
 
-.shop-btn:hover {
+.shop-btn:hover,
+.dm-button:hover {
   opacity: 0.9;
 }
 
@@ -1068,6 +1078,56 @@ main{ padding-top: var(--topbarH); }
   border-radius: var(--radius);
   background-color: rgba(15,23,42,.03);
   object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.project-gallery img:hover {
+  transform: scale(1.02);
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  padding: 40px;
+}
+.lightbox.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+  border-radius: 4px;
+}
+.lightbox.active img {
+  transform: scale(1);
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 40px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 10px;
+  z-index: 1001;
 }
 
 /* Back link */
@@ -1095,4 +1155,67 @@ main{ padding-top: var(--topbarH); }
       max-height: 80vh;
       object-fit: cover;
   }
+  /* Product Gallery specific styles */
+  .project-gallery.gallery-product img:first-child {
+      object-fit: contain;
+      max-height: 70vh;
+      background: transparent;
+      width: auto;
+      margin: 0 auto;
+      max-width: 100%;
+  }
+  .project-gallery.gallery-product img {
+      object-fit: contain;
+  }
+}
+/* Project Card Backgrounds */
+.card--project {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  color: #fff; /* White text for contrast */
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  background: #000; /* Fallback */
+  border: none; /* Remove border if image is there */
+}
+.card--project p {
+  color: rgba(255,255,255,0.9); /* Override muted color */
+}
+.card--project .link {
+  color: #fff;
+  border-bottom-color: rgba(255,255,255,0.5);
+}
+.card--project .pill {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  border-color: rgba(255,255,255,0.3);
+  backdrop-filter: blur(4px);
+}
+.card--project::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg-img);
+  background-size: cover;
+  background-position: center;
+  filter: blur(3px); /* Blur slightly */
+  transform: scale(1.1); /* Prevent blur edges */
+  z-index: -2;
+  transition: transform 0.6s ease;
+}
+.card--project::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4); /* Dark overlay */
+  z-index: -1;
+  transition: background 0.3s;
+}
+
+/* Hover effects */
+.card--project:hover::before {
+  transform: scale(1.15); /* Zoom in slightly */
+}
+.card--project:hover::after {
+  background: rgba(0,0,0,0.3); /* Lighten slightly on hover */
 }

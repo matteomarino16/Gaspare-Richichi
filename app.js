@@ -149,25 +149,29 @@ const projectData = {
     year: "2025",
     category: "Product",
     title: "Bambù",
-    images: [] // To be uploaded
+    images: ["progetti/BAMBU.png"]
   },
   discovolante: {
     year: "2025",
     category: "Product",
     title: "Disco Volante",
-    images: [] // To be uploaded
+    images: ["progetti/DISCO VOLANTE.png"]
   },
   pescheria: {
     year: "2024",
     category: "Branding",
     title: "Pescheria La Fontanella",
-    images: [] // To be uploaded
+    images: []
   },
   petitcadeau: {
     year: "2026",
     category: "Product",
     title: "Petit Cadeau",
-    images: [] // To be uploaded
+    images: [
+      "progetti/Petit cadeau.png",
+      "progetti/Petit cadeau 2.png",
+      "progetti/Petit cadeau 3.png"
+    ]
   }
 };
 
@@ -208,8 +212,47 @@ function initProjectPage() {
 
   // Render Gallery
   if(galleryEl && data.images && data.images.length > 0) {
-    galleryEl.innerHTML = data.images.map(src => `<img src="${src}" alt="${data.title}" loading="lazy">`).join('');
+    // Add specific class for project and category
+    galleryEl.classList.add(`project-${projectId}`);
+    if (data.category.toLowerCase().includes('product')) {
+      galleryEl.classList.add('gallery-product');
+    }
+    
+    galleryEl.innerHTML = data.images.map(src => 
+      `<img src="${src}" alt="${data.title}" loading="lazy" onclick="openLightbox('${src}')">`
+    ).join('');
   }
+}
+
+/* ===== Lightbox Logic ===== */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox ? lightbox.querySelector('img') : null;
+const lightboxClose = lightbox ? lightbox.querySelector('.lightbox-close') : null;
+
+function openLightbox(src) {
+  if(!lightbox || !lightboxImg) return;
+  lightboxImg.src = src;
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  if(!lightbox) return;
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    if(lightboxImg) lightboxImg.src = '';
+  }, 300);
+}
+
+if(lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+if(lightbox) {
+  lightbox.addEventListener('click', (e) => {
+    if(e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+  });
 }
 
 // Run if we are on project page
@@ -330,7 +373,7 @@ const translations = {
     // Shop
     shop_title: "Shop",
     product_status: "su richiesta",
-    product_lamp_title: "LAMPADA DESIGN",
+    product_lamp_title: "Bambù",
     product_material: "100% MADE IN ITALY",
     dm_order: "DM FOR ORDER"
   },
@@ -440,7 +483,7 @@ const translations = {
     // Shop
     shop_title: "Shop",
     product_status: "on request",
-    product_lamp_title: "DESIGN LAMP",
+    product_lamp_title: "Bambù",
     product_material: "100% MADE IN ITALY",
     dm_order: "DM FOR ORDER"
   }

@@ -11,7 +11,9 @@
 
 <body>
   <header class="topbar">
-    <div class="brand">Gaspare Richichi Design</div>
+    <div class="brand">
+      <img src="logoheader.png" alt="Gaspare Richichi Design" style="height: 24px; width: auto; display: block;">
+    </div>
     <nav class="nav">
       <a href="shop.html" class="btn-icon" aria-label="Shop">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -226,7 +228,7 @@
           </article>
 
           <!-- Project 2 -->
-          <article class="card reveal">
+          <article class="card reveal card--project" style="--bg-img: url('progetti/BAMBU.png');">
             <div class="card__meta">
               <span class="pill">2025</span><span class="pill pill--muted">Product</span>
             </div>
@@ -238,7 +240,7 @@
           </article>
 
           <!-- Project 3 -->
-          <article class="card reveal">
+          <article class="card reveal card--project" style="--bg-img: url('progetti/DISCO VOLANTE.png');">
             <div class="card__meta">
               <span class="pill">2025</span><span class="pill pill--muted">Product</span>
             </div>
@@ -262,7 +264,7 @@
           </article>
 
           <!-- Project 5 -->
-          <article class="card reveal">
+          <article class="card reveal card--project" style="--bg-img: url('progetti/Petit cadeau.png');">
             <div class="card__meta">
               <span class="pill">2026</span><span class="pill pill--muted">Product</span>
             </div>
@@ -293,7 +295,8 @@
     <section id="contatti" class="spacer spacer--after">
       <div class="spacer__inner reveal">
         <h2 data-i18n="contacts_title">Contatti</h2>
-        <div class="contact-grid">
+      </div>
+      <div class="contact-grid reveal" style="max-width: 1200px; margin: 32px auto 0 auto;">
           <div class="contact-left-column">
             <div class="contact-info">
               <p class="contact-intro" data-i18n="contacts_intro">Hai un progetto in mente? Scrivimi o vieni a trovarmi.</p>
@@ -353,7 +356,6 @@
             </form>
           </div>
         </div>
-      </div>
     </section>
 
     <footer class="footer">
