@@ -659,6 +659,41 @@ main{ padding-top: var(--topbarH); }
   }
 }
 
+/* ===== Progetti Section Overrides ===== */
+#progetti {
+  --cardW: 420px; /* Smaller width for projects */
+  --cardH: auto;
+}
+
+#progetti .card {
+  aspect-ratio: 3/4; /* Vertical rectangular shape */
+  padding: 32px;
+  justify-content: space-between; /* Distribute content */
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+#progetti .card h3 {
+  font-size: 32px; /* Adjusted for smaller card */
+  margin-bottom: 16px;
+}
+
+#progetti .card p {
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  #progetti {
+    --cardW: 85vw;
+    --cardH: auto;
+  }
+  #progetti .card {
+    aspect-ratio: auto;
+    min-height: 420px;
+  }
+}
+
 /* ===== Toolkit Section ===== */
 .toolkit-section {
   padding: 100px var(--pad);
@@ -799,25 +834,6 @@ main{ padding-top: var(--topbarH); }
 .logo-grid .tool-item:nth-child(7) { animation-delay: 0.7s; }
 
 /* ===== CV Download Section ===== */
-.cv-section {
-  padding: 60px var(--pad);
-  border-bottom: 1px solid var(--line);
-  background: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.cv-container {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 /* CV Button - Clean Implementation */
 .cv-btn {
   display: flex;
@@ -963,83 +979,120 @@ main{ padding-top: var(--topbarH); }
   height: auto;
   max-height: 240px;
   object-fit: contain;
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.05));
 }
 
-.product-info {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.product-title {
-  font-size: 20px;
-  font-weight: 400;
+.product-info h3 {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--fg);
-  margin: 0;
-  letter-spacing: -0.02em;
-  text-shadow: none;
-}
-
-.product-material {
-  font-size: 11px;
   color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 0;
+  margin: 0 0 8px 0;
 }
 
-.product-price {
-  font-size: 16px;
-  font-weight: 400;
-  color: var(--fg);
-  margin-bottom: 16px;
-}
-
-/* Pagination Dots */
-.product-dots {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 16px;
-}
-
-.dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--line);
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.dot.active {
-  background-color: var(--fg);
-}
-
-/* DM Button */
-.dm-button {
-  width: 100%;
-  padding: 10px 0;
-  background-color: var(--fg);
-  border: 1px solid var(--fg);
-  color: var(--bg);
-  border-radius: 999px;
+.product-info p {
   font-size: 13px;
-  font-weight: 500;
-  text-transform: uppercase;
-  text-decoration: none;
+  font-weight: 600;
   letter-spacing: 0.05em;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0 0 24px 0;
+  color: var(--fg);
 }
 
-.dm-button:hover {
-  background-color: transparent;
+.shop-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: var(--fg);
+  color: #fff;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.shop-btn:hover {
+  opacity: 0.9;
+}
+
+/* ===== Project Page Styles ===== */
+.project-detail {
+  padding-top: 120px;
+  padding-bottom: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+}
+
+.project-header {
+  margin-bottom: 60px;
+}
+
+.project-meta {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.project-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 32px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
   color: var(--fg);
+}
+
+.project-description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 800px;
+  margin-bottom: 60px;
+  white-space: pre-line;
+}
+
+.project-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.project-gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  background-color: rgba(15,23,42,.03);
+  object-fit: cover;
+}
+
+/* Back link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 40px;
+  text-decoration: none;
+  color: var(--fg);
+  font-size: 0.9rem;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+.back-link:hover {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .project-gallery {
+      grid-template-columns: repeat(2, 1fr);
+  }
+  .project-gallery img:first-child {
+      grid-column: 1 / -1; /* First image full width */
+      max-height: 80vh;
+      object-fit: cover;
+  }
 }

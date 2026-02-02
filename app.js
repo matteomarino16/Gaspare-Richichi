@@ -1,4 +1,4 @@
- /**
+/**
  * Pinned horizontal section controllata dallo scroll verticale.
  * Logica:
  * - La sezione .hscroll deve avere altezza totale sufficiente a “consumare” lo scroll necessario
@@ -137,6 +137,91 @@ const revealObserver = new IntersectionObserver((entries, obs) => {
 
 document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
 
+/* ===== Project Data ===== */
+const projectData = {
+  nicare: {
+    year: "2022",
+    category: "Interior / Branding",
+    title: "Nicarè city apartments",
+    images: [] // To be uploaded
+  },
+  bambu: {
+    year: "2025",
+    category: "Product",
+    title: "Bambù",
+    images: [] // To be uploaded
+  },
+  discovolante: {
+    year: "2025",
+    category: "Product",
+    title: "Disco Volante",
+    images: [] // To be uploaded
+  },
+  pescheria: {
+    year: "2024",
+    category: "Branding",
+    title: "Pescheria La Fontanella",
+    images: [] // To be uploaded
+  },
+  petitcadeau: {
+    year: "2026",
+    category: "Product",
+    title: "Petit Cadeau",
+    images: [] // To be uploaded
+  }
+};
+
+/* ===== Project Page Logic ===== */
+function initProjectPage() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const projectId = urlParams.get('id');
+  
+  if (!projectId || !projectData[projectId]) return;
+  
+  const data = projectData[projectId];
+  
+  // Update Meta
+  const yearEl = document.getElementById('project-year');
+  const catEl = document.getElementById('project-category');
+  const titleEl = document.getElementById('project-title');
+  const descEl = document.getElementById('project-description');
+  const galleryEl = document.getElementById('project-gallery');
+  
+  if(yearEl) yearEl.textContent = data.year;
+  if(catEl) catEl.textContent = data.category;
+  if(titleEl) titleEl.textContent = data.title;
+  
+  // Update Description (Language dependent - handled by language switcher but we set initial here)
+  // actually language switcher handles translations based on data-i18n. 
+  // We need to inject the specific translation key for the description.
+  // But wait, the description is long text. The language switcher usually looks for elements with data-i18n.
+  // We can set the data-i18n attribute dynamically.
+  
+  if(descEl) {
+    descEl.setAttribute('data-i18n', `project_${projectId}_desc`);
+    // Also set initial text based on current lang (default 'it')
+    const currentLang = localStorage.getItem('lang') || 'it';
+    if(translations[currentLang] && translations[currentLang][`project_${projectId}_desc`]) {
+       descEl.innerHTML = translations[currentLang][`project_${projectId}_desc`];
+    }
+  }
+
+  // Render Gallery
+  if(galleryEl && data.images && data.images.length > 0) {
+    galleryEl.innerHTML = data.images.map(src => `<img src="${src}" alt="${data.title}" loading="lazy">`).join('');
+  }
+}
+
+// Run if we are on project page
+if (window.location.pathname.includes('project.html')) {
+    // Wait for DOM
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initProjectPage);
+    } else {
+        initProjectPage();
+    }
+}
+
 /* ===== Language Switcher Logic ===== */
 const translations = {
   it: {
@@ -202,14 +287,33 @@ const translations = {
     service_interior_li6: "Proposta finale e supporto",
     service_interior_ideal: "clienti privati, imprenditori, locali commerciali, agenzie immobiliari.",
     
-    // Projects
+    // Projects (Full Description)
     projects_title: "Progetti",
-    projects_subtitle: "Continua a scorrere verso il basso: qui i contenuti si muovono lateralmente.",
     open_project: "Apri",
-    project_desc_placeholder: "Descrizione breve. Sostituisci con contenuti reali.",
+    project_nicare_desc: "Nicarè city apartments è una struttura ricettiva per la quale ho curato completamente il progetto, dal design degli interni alla brand identity in un’unica visione coerente e distintiva.<br><br>L’intervento è partito dalla riconfigurazione degli spazi, studiati per offrire funzionalità, comfort e un’esperienza immersiva agli ospiti, valorizzando la luce naturale e i flussi interni.<br><br>La scelta dei materiali e degli arredi è stata guidata da un equilibrio tra estetica e durabilità, con finiture selezionate per trasmettere carattere, calore e personalità. Parallelamente, ho sviluppato l’identità visiva del brand: logo, naming, palette cromatica, tipografia e mood hanno contribuito a raccontare l’anima della struttura e a renderla riconoscibile sul mercato.<br><br>Un progetto pensato come un racconto unico, in cui spazio e immagine dialogano per creare un’esperienza memorabile e autentica per chi vi soggiorna.",
+    project_bambu_desc: "Bambù è una lampada da terra a luce diretta che trasforma la verticalità in gesto luminoso. Tre sottili tubolari in metallo si innalzano con ritmo essenziale da un solido cilindro di base, componendo una struttura minimale.<br><br>La sorgente luminosa, integrata nei profili tubolari, non si rivela direttamente ma viene proiettata sulla parete, creando una scia morbida e diffusa che disegna lo spazio e ne amplifica le superfici. La luce scorre lungo l’architettura dell’ambiente, generando un’atmosfera intima e sofisticata, ideale per definire angoli e profondità senza invadere.<br><br>Ispirata a un equilibrio tra precisione tecnica e suggestione naturale, Bambù interpreta l’illuminazione come elemento architettonico: un segno verticale capace di dialogare con lo spazio e di trasformarlo attraverso riflessi calibrati e controllati.",
+    project_discovolante_desc: "Disco Volante è una lampada da tavolo a luce indiretta che nasce dall’incontro tra struttura e riflesso.<br><br>Una composizione essenziale di tubolari in metallo contiene la sorgente luminosa, nascosta allo sguardo, che proietta il suo bagliore su un disco a specchio sospeso, vero fulcro del progetto.<br><br>La superficie riflettente cattura la luce e la restituisce sul lato opposto, creando un’illuminazione morbida e avvolgente che dialoga con lo spazio circostante e ne modifica la percezione. Il gioco di rimbalzi luminosi genera profondità e movimento, trasformando l’oggetto in una presenza scenografica ma discreta.<br><br>Pensata come elemento funzionale e scultoreo allo stesso tempo, Disco Volante interpreta la luce come materia progettuale, capace di definire l’atmosfera e dare carattere all’ambiente con un gesto semplice e iconico.",
+    project_pescheria_desc: "Per il progetto di re-branding della Pescheria La Fontanella di Palermo ho costruito una nuova identità visiva capace di coniugare memoria e contemporaneità, rispettando la forza del luogo e rinnovandone il linguaggio. L’intervento ha interessato ogni livello del brand, a partire dal disegno del logo, pensato come segno essenziale ma fortemente riconoscibile.<br><br>La palette cromatica è stata selezionata per richiamare il mare, la freschezza del prodotto e la luce mediterranea, mentre la scelta tipografica ha definito un carattere solido, elegante ed autentico, capace di dialogare con la tradizione artigianale della bottega ed i nuovi supporti.<br><br>Il progetto si è esteso alle applicazioni fisiche del brand: divise, shopping bag e biglietti da visita sono stati concepiti come elementi narrativi, coerenti e funzionali, in grado di trasformare l’esperienza d’acquisto in un gesto identitario.<br><br>Un lavoro di sintesi tra storia e innovazione, in cui grafica e spazio commerciale si incontrano per restituire alla pescheria un’immagine rinnovata, contemporanea e profondamente radicata nel territorio.",
+    project_petitcadeau_desc: "Petit Cadeau è una bomboniera contemporanea che unisce materia e tecnologia in un oggetto dal valore simbolico e duraturo. Al suo interno è integrato un chip NFC che, una volta avvicinato allo smartphone, permette di accedere ad una pagina dedicata contenente il biglietto di laurea e la tesi del festeggiato, trasformando il ricordo in un’esperienza digitale da conservare nel tempo e condividere con i propri cari.<br><br>Il progetto nasce dall’idea di superare il concetto tradizionale di bomboniera, rendendolo interattivo e su misura. Ogni elemento è completamente personalizzabile: dalle forme ai materiali, fino ai contenuti digitali, costruiti per raccontare in modo unico il traguardo celebrato.<br><br>Petit Cadeau diventa così un ponte tra fisico e virtuale, tra gesto celebrativo e archivio di memoria, capace di racchiudere in un piccolo oggetto un racconto più ampio, intimo e significativo.",
     
+    // Projects (Short Description)
+    project_nicare_short: "Nicarè city apartments è una struttura ricettiva per la quale ho curato completamente il progetto, dal design degli interni alla brand identity.",
+    project_bambu_short: "Bambù è una lampada da terra a luce diretta che trasforma la verticalità in gesto luminoso.",
+    project_discovolante_short: "Disco Volante è una lampada da tavolo a luce indiretta che nasce dall’incontro tra struttura e riflesso.",
+    project_pescheria_short: "Per il progetto di re-branding della Pescheria La Fontanella ho costruito una nuova identità visiva capace di coniugare memoria e contemporaneità.",
+    project_petitcadeau_short: "Petit Cadeau è una bomboniera contemporanea che unisce materia e tecnologia in un oggetto dal valore simbolico e duraturo.",
+    
+    // Project Page
+    back_home: "Torna alla Home",
+    images_coming_soon: "Immagini in arrivo...",
+    nav_about: "Chi sono",
+    nav_services: "Servizi",
+    nav_projects: "Progetti",
+    nav_contacts: "Contatti",
+
     // CV
-    cv_download_text: "Scarica ora i miei progetti",
+    download_title: "Scarica Portfolio",
+    cv_download_text: "Scarica Portfolio",
     
     // Contacts
     contacts_title: "Contatti",
@@ -293,13 +397,33 @@ const translations = {
     service_interior_li6: "Final proposal and support",
     service_interior_ideal: "private clients, entrepreneurs, commercial premises, real estate agencies.",
     
-    // Projects
+    // Projects (Full Description)
     projects_title: "Projects",
     open_project: "Open",
-    project_desc_placeholder: "Short description. Replace with real content.",
+    project_nicare_desc: "Nicarè city apartments is an accommodation facility for which I completely curated the project, from interior design to brand identity in a single coherent and distinctive vision.<br><br>The intervention started from the reconfiguration of spaces, designed to offer functionality, comfort, and an immersive experience for guests, enhancing natural light and internal flows.<br><br>The choice of materials and furnishings was guided by a balance between aesthetics and durability, with finishes selected to convey character, warmth, and personality. At the same time, I developed the brand's visual identity: logo, naming, color palette, typography, and mood contributed to telling the soul of the structure and making it recognizable on the market.<br><br>A project conceived as a unique story, in which space and image dialogue to create a memorable and authentic experience for those who stay there.",
+    project_bambu_desc: "Bambù is a direct light floor lamp that transforms verticality into a luminous gesture. Three thin metal tubes rise with essential rhythm from a solid base cylinder, composing a minimal structure.<br><br>The light source, integrated into the tubular profiles, is not revealed directly but is projected onto the wall, creating a soft and diffused trail that draws the space and amplifies its surfaces. The light flows along the architecture of the environment, generating an intimate and sophisticated atmosphere, ideal for defining corners and depths without invading.<br><br>Inspired by a balance between technical precision and natural suggestion, Bambù interprets lighting as an architectural element: a vertical sign capable of dialoguing with space and transforming it through calibrated and controlled reflections.",
+    project_discovolante_desc: "Disco Volante is an indirect light table lamp born from the encounter between structure and reflection.<br><br>An essential composition of metal tubes contains the light source, hidden from view, which projects its glow onto a suspended mirror disc, the true fulcrum of the project.<br><br>The reflecting surface captures the light and returns it to the opposite side, creating soft and enveloping lighting that dialogues with the surrounding space and modifies its perception. The play of light bounces generates depth and movement, transforming the object into a scenographic but discreet presence.<br><br>Conceived as a functional and sculptural element at the same time, Disco Volante interprets light as design material, capable of defining the atmosphere and giving character to the environment with a simple and iconic gesture.",
+    project_pescheria_desc: "For the re-branding project of Pescheria La Fontanella in Palermo, I built a new visual identity capable of combining memory and contemporaneity, respecting the strength of the place and renewing its language. The intervention involved every level of the brand, starting from the logo design, conceived as an essential but highly recognizable sign.<br><br>The color palette was selected to recall the sea, the freshness of the product, and the Mediterranean light, while the typographic choice defined a solid, elegant, and authentic character, capable of dialoguing with the artisan tradition of the shop and the new supports.<br><br>The project extended to the physical applications of the brand: uniforms, shopping bags, and business cards were conceived as narrative elements, coherent and functional, able to transform the purchasing experience into an identifying gesture.<br><br>A work of synthesis between history and innovation, in which graphics and commercial space meet to restore to the fishmonger a renewed, contemporary image deeply rooted in the territory.",
+    project_petitcadeau_desc: "Petit Cadeau is a contemporary favor that combines material and technology in an object of symbolic and lasting value. Integrated inside is an NFC chip that, once approached to the smartphone, allows access to a dedicated page containing the graduation card and the thesis of the celebrated person, transforming the memory into a digital experience to keep over time and share with loved ones.<br><br>The project stems from the idea of overcoming the traditional concept of favor, making it interactive and made-to-measure. Every element is completely customizable: from shapes to materials, up to digital contents, built to tell the celebrated milestone in a unique way.<br><br>Petit Cadeau thus becomes a bridge between physical and virtual, between celebratory gesture and memory archive, capable of enclosing a wider, intimate, and significant story in a small object.",
     
+    // Projects (Short Description)
+    project_nicare_short: "Nicarè city apartments is an accommodation facility for which I completely curated the project, from interior design to brand identity.",
+    project_bambu_short: "Bambù is a direct light floor lamp that transforms verticality into a luminous gesture.",
+    project_discovolante_short: "Disco Volante is an indirect light table lamp born from the encounter between structure and reflection.",
+    project_pescheria_short: "For the re-branding project of Pescheria La Fontanella, I built a new visual identity capable of combining memory and contemporaneity.",
+    project_petitcadeau_short: "Petit Cadeau is a contemporary favor that combines material and technology in an object of symbolic and lasting value.",
+    
+    // Project Page
+    back_home: "Back to Home",
+    images_coming_soon: "Images coming soon...",
+    nav_about: "About",
+    nav_services: "Services",
+    nav_projects: "Projects",
+    nav_contacts: "Contact",
+
     // CV
-    cv_download_text: "Download my projects now",
+    download_title: "Download Portfolio",
+    cv_download_text: "Download Portfolio",
     
     // Contacts
     contacts_title: "Contact",
@@ -345,12 +469,28 @@ function setLanguage(lang) {
   });
 }
 
-// Inizializzazione Lingua
+// Inizializzazione
 document.addEventListener('DOMContentLoaded', () => {
   const savedLang = localStorage.getItem('preferred_lang') || 'it';
+  
+  // Project Page Logic
+  if (window.location.pathname.includes("project.html")) {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const data = projectData[id];
+    
+    if (data) {
+      document.getElementById("project-year").textContent = data.year;
+      document.getElementById("project-category").textContent = data.category;
+      document.getElementById("project-title").textContent = data.title;
+      document.getElementById("project-description").setAttribute("data-i18n", `project_${id}_desc`);
+    }
+  }
+
+  // Set Language (triggers text update)
   setLanguage(savedLang);
 
-  // Event Listeners per i pulsanti
+  // Event Listeners per i pulsanti lingua
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation(); // Evita chiusura menu se cliccato

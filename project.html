@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gaspare Richichi Design - Project</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <a href="index.html" class="brand" style="text-decoration: none; color: inherit;">Gaspare Richichi Design</a>
+    <nav class="nav">
+      <a href="shop.html" class="btn-icon" aria-label="Shop">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+      </a>
+      <button id="menuBtn" class="btn-icon" type="button" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <article class="project-detail">
+        <a href="index.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span data-i18n="back_home">Torna alla Home</span>
+        </a>
+
+        <header class="project-header">
+            <div class="project-meta">
+                <span class="pill" id="project-year"></span>
+                <span class="pill pill--muted" id="project-category"></span>
+            </div>
+            <h1 class="project-title" id="project-title"></h1>
+        </header>
+
+        <div class="project-description" id="project-description">
+            <!-- Full description injected via JS -->
+        </div>
+
+        <section class="project-gallery" id="project-gallery">
+            <!-- Images injected via JS -->
+            <!-- Placeholder for now -->
+            <div style="background: #eee; height: 400px; grid-column: 1/-1; display: flex; align-items: center; justify-content: center; color: #999;">
+                <p data-i18n="images_coming_soon">Immagini in arrivo...</p>
+            </div>
+        </section>
+    </article>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <p>&copy; 2026 Gasparerichichi.com - <span data-i18n="footer_rights">Tutti i diritti riservati</span></p>
+        <p style="margin-top: 8px; font-size: 13px;">web by <a href="https://www.instagram.com/_mkatteomarino" target="_blank" style="color: inherit; text-decoration: none;">Matteo Marino</a></p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Overlay Menu (Copied from index.html structure, will use same app.js logic) -->
+  <div id="overlay" class="overlay" hidden>
+    <div class="overlay__backdrop"></div>
+    <div class="overlay__panel">
+      <div class="overlay__header">
+        <span class="brand">Menu</span>
+        <button id="closeBtn" class="btn-icon" type="button" aria-label="Close menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <nav class="overlay__nav">
+        <a href="index.html" class="overlay__link" data-close>Home</a>
+        <a href="index.html#chi-sono" class="overlay__link" data-close data-i18n="nav_about">Chi sono</a>
+        <a href="index.html#servizi" class="overlay__link" data-close data-i18n="nav_services">Servizi</a>
+        <a href="index.html#progetti" class="overlay__link" data-close data-i18n="nav_projects">Progetti</a>
+        <a href="shop.html" class="overlay__link" data-close>Shop</a>
+        <a href="index.html#contatti" class="overlay__link" data-close data-i18n="nav_contacts">Contatti</a>
+      </nav>
+      <div class="overlay__footer">
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="it">IT</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <p class="overlay__credit">100% MADE IN ITALY</p>
+        <p class="overlay__credit">DM FOR ORDER</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
