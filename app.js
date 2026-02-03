@@ -40,11 +40,11 @@ class HorizontalSection {
     this.update();
   }
 
-  update() {
+  update(customScrollY) {
     if (!this.rail) return;
     
     const sectionTop = this.section.offsetTop;
-    const scrollY = window.scrollY;
+    const scrollY = customScrollY !== undefined ? customScrollY : window.scrollY;
     
     const raw = (scrollY - sectionTop) / (this.sectionScrollLen || 1);
     const progress = Math.max(0, Math.min(1, raw));
@@ -64,17 +64,27 @@ function initScrollers() {
   });
 }
 
-let ticking = false;
-function onScroll() {
-  if (ticking) return;
-  ticking = true;
-  requestAnimationFrame(() => {
-    scrollers.forEach(s => s.update());
-    ticking = false;
-  });
-}
+/* ===== Lenis Smooth Scroll ===== */
+const lenis = new Lenis({
+  lerp: 0.1,
+  smoothWheel: true
+});
 
-window.addEventListener("scroll", onScroll, { passive: true });
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+lenis.on('scroll', (e) => {
+  // Update horizontal sections
+  scrollers.forEach(s => s.update(e.scroll));
+  
+  // Close overlay if open
+  if (overlay && overlay.classList.contains("open")) {
+    closeOverlay();
+  }
+});
 window.addEventListener("resize", () => {
   scrollers.forEach(s => s.compute());
 }, { passive: true });
@@ -114,12 +124,7 @@ overlay.addEventListener("click", (e) => {
   }
 });
 
-// Close on Scroll
-window.addEventListener("scroll", () => {
-  if (overlay.classList.contains("open")) {
-    closeOverlay();
-  }
-}, { passive: true });
+// Scroll listener removed (handled by Lenis)
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && overlay.classList.contains("open")) closeOverlay();

@@ -97,14 +97,14 @@ main{ padding-top: var(--topbarH); }
     min-height: calc(100vh - var(--topbarH));
     min-height: calc(100dvh - var(--topbarH));
     height: auto; 
-    padding: 10px var(--pad);
+    padding: 0 var(--pad) 10px; /* Removed top padding to reduce gap with header */
     align-items: stretch;
   }
   .hero__inner {
     height: 100%; /* Ensure inner container fills the hero */
     flex-direction: column;
     justify-content: center;
-    gap: 32px;
+    gap: 16px; /* Reduced gap between elements */
   }
   .hero__img {
     order: 1;
