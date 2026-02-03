@@ -717,8 +717,13 @@ input, button, textarea, select {
     --cardH: auto;
   }
   #servizi .card {
-    aspect-ratio: auto; /* Allow natural flow on mobile */
-    min-height: 400px;
+    width: var(--cardW);
+    min-height: 420px; /* Uniform height for all cards on mobile */
+    height: 420px;
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
   /* Ensure alignment on mobile */
   .hscroll__rail {
@@ -756,8 +761,10 @@ input, button, textarea, select {
     --cardH: auto;
   }
   #progetti .card {
+    width: var(--cardW);
+    min-height: 420px; /* Uniform height for all cards on mobile */
+    height: 420px;
     aspect-ratio: auto;
-    min-height: 420px;
   }
 }
 
