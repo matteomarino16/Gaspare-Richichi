@@ -11,6 +11,7 @@ const menuBtn = document.getElementById("menuBtn");
 
 /* ===== Horizontal Scroll Logic (Multi-instance) ===== */
 const scrollers = [];
+let lastWinWidth = window.innerWidth;
 
 class HorizontalSection {
   constructor(element) {
@@ -19,6 +20,7 @@ class HorizontalSection {
     this.rail = this.section.querySelector(".hscroll__rail");
     this.maxTranslateX = 0;
     this.sectionScrollLen = 0;
+    this.sectionTop = 0; // Cache offsetTop
     
     // Bind methods
     this.compute = this.compute.bind(this);
@@ -28,12 +30,19 @@ class HorizontalSection {
   compute() {
     if (!this.rail || !this.sticky) return;
     
+    // Cache section top position to avoid layout thrashing in update loop
+    // Note: scrollY is added because getBoundingClientRect is relative to viewport, 
+    // but we need absolute document position or just use offsetTop if parent is relative/body
+    // Using offsetTop is safer if no transforms on parents
+    this.sectionTop = this.section.offsetTop;
+
     const railWidth = this.rail.scrollWidth;
     const viewportW = window.innerWidth;
     
     this.maxTranslateX = Math.max(0, railWidth - viewportW);
     this.sectionScrollLen = this.maxTranslateX;
     
+    // Ensure sticky container has stable height for calculations
     const stickyH = this.sticky.getBoundingClientRect().height;
     this.section.style.height = `${stickyH + this.sectionScrollLen}px`;
     
@@ -43,13 +52,14 @@ class HorizontalSection {
   update(customScrollY) {
     if (!this.rail) return;
     
-    const sectionTop = this.section.offsetTop;
     const scrollY = customScrollY !== undefined ? customScrollY : window.scrollY;
     
-    const raw = (scrollY - sectionTop) / (this.sectionScrollLen || 1);
+    // Use cached sectionTop
+    const raw = (scrollY - this.sectionTop) / (this.sectionScrollLen || 1);
     const progress = Math.max(0, Math.min(1, raw));
     
-    const x = -Math.round(progress * this.maxTranslateX);
+    // Use floating point for smoother sub-pixel rendering
+    const x = -(progress * this.maxTranslateX);
     this.rail.style.transform = `translate3d(${x}px,0,0)`;
   }
 }
@@ -65,28 +75,59 @@ function initScrollers() {
 }
 
 /* ===== Lenis Smooth Scroll ===== */
-const lenis = new Lenis({
-  lerp: 0.1,
-  smoothWheel: true
-});
+// Check if device is mobile
+const isMobile = window.innerWidth < 768;
 
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
+let lenis;
 
-lenis.on('scroll', (e) => {
-  // Update horizontal sections
-  scrollers.forEach(s => s.update(e.scroll));
-  
-  // Close overlay if open
-  if (overlay && overlay.classList.contains("open")) {
-    closeOverlay();
+if (!isMobile) {
+  lenis = new Lenis({
+    lerp: 0.1,
+    smoothWheel: true,
+    touchMultiplier: 1.5 
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
   }
-});
+  requestAnimationFrame(raf);
+
+  lenis.on('scroll', (e) => {
+    // Update horizontal sections
+    scrollers.forEach(s => s.update(e.scroll));
+    
+    // Close overlay if open
+    if (overlay && overlay.classList.contains("open")) {
+      closeOverlay();
+    }
+  });
+} else {
+  // Native scroll for mobile with RAF throttling
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        scrollers.forEach(s => s.update(scrollY));
+        
+        // Close overlay if open
+        if (overlay && overlay.classList.contains("open")) {
+          closeOverlay();
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+}
+
+// Optimize resize: only re-compute if width changes (ignores mobile URL bar toggle)
 window.addEventListener("resize", () => {
-  scrollers.forEach(s => s.compute());
+  if (window.innerWidth !== lastWinWidth) {
+    lastWinWidth = window.innerWidth;
+    scrollers.forEach(s => s.compute());
+  }
 }, { passive: true });
 
 // Init

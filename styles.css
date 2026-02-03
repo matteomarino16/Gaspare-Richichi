@@ -399,14 +399,17 @@ main{ padding-top: var(--topbarH); }
   position: sticky;
   top: var(--topbarH);
   height: calc(100vh - var(--topbarH));
-  height: calc(100dvh - var(--topbarH));
+  height: calc(100svh - var(--topbarH)); /* Use Small Viewport Height to prevent expansion/stretching on mobile */
   overflow: hidden; /* importante: nascondi overflow mentre trasliamo */
   background: var(--bg);
+  display: flex;
+  flex-direction: column;
 }
 
 .hscroll__head{
   padding: 72px var(--pad) 10px var(--pad);
   width: 100%;
+  flex: 0 0 auto;
 }
 .hscroll__head-inner{
   max-width: 1200px;
@@ -428,8 +431,10 @@ main{ padding-top: var(--topbarH); }
 .hscroll__rail{
   display: flex;
   gap: 0; /* Removing gap to handle spacing via margins manually for robustness */
-  padding: 16px 0 40px var(--pad);
-  height: calc(100% - 86px);
+  padding: 16px 0 80px var(--pad);
+  flex: 1;
+  min-height: 0;
+  width: 100%;
   align-items: center;
 
   will-change: transform;
