@@ -95,42 +95,44 @@ main{ padding-top: var(--topbarH); }
   .hero {
     height: calc(100vh - var(--topbarH));
     height: calc(100dvh - var(--topbarH));
-    padding: 20px var(--pad);
+    padding: 10px var(--pad); /* Reduced padding to maximize space */
     align-items: stretch;
   }
   .hero__inner {
+    height: 100%; /* Ensure inner container fills the hero */
     flex-direction: column;
-    justify-content: space-between;
-    gap: 24px;
+    justify-content: center;
+    gap: 16px;
   }
   .hero__img {
     order: 1;
     margin: 0;
-    flex: 0 0 auto;
+    flex: 1 1 auto; /* Allow image container to take available space */
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 0;
-    padding-bottom: 12px;
+    min-height: 0; /* Critical for flex child scrolling/shrinking */
+    padding-bottom: 0;
+    overflow: hidden;
   }
   .hero__photo {
-    max-height: 55vh;
+    max-height: 100%; /* Fit within the flex container */
+    max-width: 100%;
     width: auto;
-    max-width: 450px;
     height: auto;
     object-fit: contain;
     object-position: center;
   }
   .hero__content {
     order: 2;
-    flex: 0 0 auto;
+    flex: 0 0 auto; /* Text takes only what it needs */
     text-align: left;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
   }
   .hero .hero__title {
     font-size: clamp(28px, 7vw, 34px);
     max-width: 100%;
-    line-height: 1.2;
+    line-height: 1.1;
   }
 }
 
