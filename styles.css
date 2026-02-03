@@ -112,7 +112,7 @@ main{ padding-top: var(--topbarH); }
     margin: 0;
     flex: 0 0 auto;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end; /* Align to right (menu button) */
     align-items: flex-start;
     min-height: 0;
     padding-bottom: 0;
@@ -125,6 +125,7 @@ main{ padding-top: var(--topbarH); }
     height: auto;
     object-fit: contain;
     object-position: center top;
+    margin-right: 8px; /* Align visually with the menu icon */
   }
   .hero__content {
     order: 2;
@@ -181,9 +182,12 @@ main{ padding-top: var(--topbarH); }
     letter-spacing: -0.02em; /* Restored */
   }
   .hero__img {
-    flex: 0 0 450px; /* Restored width (was 650px) */
+    flex: 0 0 480px; /* Adjusted width for desktop - balanced size */
     order: 2; /* Image second (right) */
     margin-bottom: 0;
+  }
+  .hero__photo {
+    max-width: 100%; /* Allow image to fill the larger container */
   }
 }
 
