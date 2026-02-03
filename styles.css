@@ -90,12 +90,14 @@ body{
 
 main{ padding-top: var(--topbarH); }
 
-/* Mobile specific adjustment: Fit to viewport */
+/* Mobile specific adjustment: Fit to viewport but allow scroll if needed */
 @media (max-width: 767px) {
   .hero {
-    height: calc(100vh - var(--topbarH));
-    height: calc(100dvh - var(--topbarH));
-    padding: 10px var(--pad); /* Reduced padding to maximize space */
+    /* Use min-height instead of fixed height to prevent cutting off content on very small screens */
+    min-height: calc(100vh - var(--topbarH));
+    min-height: calc(100dvh - var(--topbarH));
+    height: auto; 
+    padding: 10px var(--pad);
     align-items: stretch;
   }
   .hero__inner {
