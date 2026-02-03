@@ -285,7 +285,6 @@ const translations = {
     
     // Services
     services_title: "Servizi",
-    services_subtitle: "Soluzioni su misura per ogni esigenza.",
     book_now: "Prenota ora",
     ideal_for: "Ideale per:",
     
