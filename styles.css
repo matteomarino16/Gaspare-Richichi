@@ -887,13 +887,59 @@ input, button, textarea, select {
     padding: 60px var(--pad);
   }
   .logo-grid {
-    gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
   }
   .tool-item {
-    width: 80px;
-    height: 80px;
-    padding: 16px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    padding: 12px;
     border-radius: 16px;
+  }
+  
+  /* Mobile Tooltips: Hidden by default, visible on click (.active-tooltip) */
+  .tool-item .tool-name {
+    opacity: 0;
+    visibility: hidden;
+    font-size: 9px;
+    padding: 4px 6px;
+    width: max-content;
+    max-width: 150%;
+    pointer-events: none;
+    transition: all 0.2s ease;
+  }
+  
+  .tool-item.active-tooltip .tool-name {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Row 1: Tooltips Above */
+  .tool-item:nth-child(-n+4) .tool-name {
+    bottom: auto;
+    top: -32px;
+  }
+  /* Show state position adjustment if needed, but fixed position is fine */
+  .tool-item:nth-child(-n+4).active-tooltip .tool-name {
+    top: -36px; /* Slight lift animation */
+  }
+
+  .tool-item:nth-child(-n+4) .tool-name::before {
+    top: auto;
+    bottom: -4px;
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid rgba(0, 0, 0, 0.8);
+  }
+  
+  /* Row 2: Tooltips Below */
+  .tool-item:nth-child(n+5) .tool-name {
+    top: auto;
+    bottom: -32px;
+  }
+  .tool-item:nth-child(n+5).active-tooltip .tool-name {
+    bottom: -36px; /* Slight drop animation */
   }
 }
 
@@ -925,6 +971,69 @@ input, button, textarea, select {
 .logo-grid .tool-item:nth-child(4) { animation-delay: 0.4s; }
 .logo-grid .tool-item:nth-child(5) { animation-delay: 0.5s; }
 .logo-grid .tool-item:nth-child(6) { animation-delay: 0.6s; }
+
+/* ===== MOBILE RESIZING & LAYOUT FIXES ===== */
+@media (max-width: 767px) {
+  /* 1. Horizontal Scroll Adjustments for Mobile */
+  /* We revert to horizontal scroll but adjust sizes for better fit */
+  
+  .hscroll__head {
+    padding-bottom: 10px;
+  }
+
+  .hscroll__rail {
+    /* Restore horizontal layout padding */
+    padding: 0 0 40px var(--pad);
+  }
+
+  /* 2. Responsive Card Sizing for Horizontal Scroll */
+  #servizi .card,
+  #progetti .card {
+    /* Make cards responsive but keep them in horizontal rail */
+    width: 85vw;
+    max-width: 360px;
+    flex: 0 0 auto;
+    /* Height is controlled by rail/sticky container */
+    padding: 24px;
+    aspect-ratio: auto;
+  }
+  
+  /* 3. Shop Grid - Ensure single column on small screens */
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .shop-product-section {
+    padding: 24px var(--pad);
+  }
+  
+  .shop-title {
+    margin-bottom: 32px;
+    font-size: 32px;
+  }
+
+  /* 4. General Fluidity Improvements */
+  .spacer {
+    padding: 40px var(--pad);
+  }
+  
+  /* FIX FOR ABOUT SECTION: Remove forced breaks and ensure full width flow */
+  .spacer p br {
+    display: none;
+  }
+  .spacer p {
+    width: 100%;
+  }
+  
+  .card h3 {
+    font-size: 24px;
+  }
+  
+  .project-title {
+    font-size: 32px;
+  }
+}
 .logo-grid .tool-item:nth-child(7) { animation-delay: 0.7s; }
 
 /* ===== CV Download Section ===== */

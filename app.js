@@ -659,4 +659,33 @@ document.addEventListener('DOMContentLoaded', () => {
       setLanguage(btn.dataset.lang);
     });
   });
+
+  // Mobile Toolkit Click Logic
+  const toolItems = document.querySelectorAll('.tool-item');
+  if (toolItems.length > 0) {
+    toolItems.forEach(item => {
+      item.addEventListener('click', function(e) {
+        // Only active on mobile
+        if (window.innerWidth > 768) return;
+        
+        // If already active, remove it
+        if (this.classList.contains('active-tooltip')) {
+          this.classList.remove('active-tooltip');
+        } else {
+          // Remove from all others first (exclusive behavior)
+          toolItems.forEach(el => el.classList.remove('active-tooltip'));
+          // Add to clicked
+          this.classList.add('active-tooltip');
+        }
+      });
+    });
+    
+    // Close tooltips when clicking outside
+    document.addEventListener('click', function(e) {
+      if (window.innerWidth > 768) return;
+      if (!e.target.closest('.tool-item')) {
+        toolItems.forEach(el => el.classList.remove('active-tooltip'));
+      }
+    });
+  }
 });
