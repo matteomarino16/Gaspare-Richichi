@@ -1097,11 +1097,18 @@ input, button, textarea, select {
   display: none; /* Chrome/Safari */
 }
 
-.product-slider-track .product-image {
+.product-slider-track .product-image-link {
   flex: 0 0 100%;
   width: 100%;
   scroll-snap-align: center;
+  display: block;
+}
+
+.product-slider-track .product-image {
+  width: 100%;
+  height: 100%; /* Ensure it fills the link */
   object-fit: contain;
+  display: block;
 }
 
 .slider-btn {
