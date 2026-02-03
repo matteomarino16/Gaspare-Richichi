@@ -102,7 +102,7 @@ main{ padding-top: var(--topbarH); }
     height: 100%; /* Ensure inner container fills the hero */
     flex-direction: column;
     justify-content: center;
-    gap: 16px;
+    gap: 32px;
   }
   .hero__img {
     order: 1;
@@ -130,7 +130,7 @@ main{ padding-top: var(--topbarH); }
     padding-bottom: 10px;
   }
   .hero .hero__title {
-    font-size: clamp(28px, 7vw, 34px);
+    font-size: clamp(22px, 5vw, 28px);
     max-width: 100%;
     line-height: 1.1;
   }
@@ -139,7 +139,7 @@ main{ padding-top: var(--topbarH); }
 .hero__photo {
   display: block;
   width: 100%;
-  max-width: 450px;
+  max-width: 350px;
   height: auto;
 }
 .hero{
