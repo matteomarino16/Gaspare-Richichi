@@ -109,7 +109,7 @@ main{ padding-top: var(--topbarH); }
   .hero__img {
     order: 1;
     margin: 0;
-    flex: 1 1 auto; /* Allow image container to take available space */
+    flex: 0 1 auto; /* Don't force growth, let it size to content */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -118,7 +118,7 @@ main{ padding-top: var(--topbarH); }
     overflow: hidden;
   }
   .hero__photo {
-    max-height: 100%; /* Fit within the flex container */
+    max-height: 50vh; /* Limit height to ensure text is visible below */
     max-width: 100%;
     width: auto;
     height: auto;
