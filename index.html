@@ -6,7 +6,7 @@
   <title>Gaspare Richichi Design</title>
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" href="favicon.png" type="image/png">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=1.1" />
 </head>
 
 <body>
@@ -292,12 +292,38 @@
     <section id="contatti" class="spacer spacer--after">
       <div class="spacer__inner reveal">
         <h2 data-i18n="contacts_title">Contatti</h2>
+        <p class="contacts-intro" data-i18n="contacts_intro">Hai un progetto in mente? Scrivimi o vieni a trovarmi.</p>
       </div>
-      <div class="contact-grid reveal" style="max-width: 1200px; margin: 32px auto 0 auto;">
-          <div class="contact-left-column">
+      
+      <div class="contact-grid reveal" style="max-width: 800px; margin: 32px auto 0 auto; display: flex; flex-direction: column; gap: 48px;">
+          
+          <!-- FORM (ora sopra) -->
+          <div class="contact-form-wrapper" style="width: 100%;">
+            <form class="contact-form" action="#" method="POST">
+              <div class="form-group">
+                <label for="name" data-i18n="label_name">Nome e Cognome</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="email" data-i18n="label_email">Email</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="phone" data-i18n="label_phone">Numero di telefono</label>
+                <input type="tel" id="phone" name="phone">
+              </div>
+              <div class="form-group">
+                <label for="message" data-i18n="label_message">Messaggio</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary" style="width: 100%; justify-content: center;" data-i18n="btn_send">Invia richiesta</button>
+            </form>
+          </div>
+
+          <!-- CONTATTI (ora sotto) -->
+          <div class="contact-left-column" style="text-align: center;">
             <div class="contact-info">
-              <p class="contact-intro" data-i18n="contacts_intro">Hai un progetto in mente? Scrivimi o vieni a trovarmi.</p>
-              <ul class="contact-list">
+              <ul class="contact-list contact-list--clean">
                 <li>
                   <a href="mailto:gasparerichichidesign@gmail.com">
                     <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -318,7 +344,7 @@
                 </li>
               </ul>
             </div>
-            <div class="social-links">
+            <div class="social-links" style="justify-content: center; margin-top: 24px;">
               <a href="https://www.instagram.com/gaspare_richichi/" target="_blank" aria-label="Instagram">
                 <svg class="icon-social" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
               </a>
@@ -330,34 +356,12 @@
               </a>
             </div>
           </div>
-          
-          <div class="contact-form-wrapper">
-            <form class="contact-form" action="#" method="POST">
-              <div class="form-group">
-                <label for="name" data-i18n="label_name">Nome e Cognome</label>
-                <input type="text" id="name" name="name" required>
-              </div>
-              <div class="form-group">
-                <label for="email" data-i18n="label_email">Email</label>
-                <input type="email" id="email" name="email" required>
-              </div>
-              <div class="form-group">
-                <label for="phone" data-i18n="label_phone">Numero di telefono</label>
-                <input type="tel" id="phone" name="phone">
-              </div>
-              <div class="form-group">
-                <label for="message" data-i18n="label_message">Messaggio</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
-              </div>
-              <button type="submit" class="btn btn--primary" data-i18n="btn_send">Invia richiesta</button>
-            </form>
-          </div>
-        </div>
+      </div>
     </section>
 
     <footer class="footer">
       <div class="footer__inner reveal">
-        <p>&copy; 2026 Gasparerichichi.com - <span data-i18n="footer_rights">Tutti i diritti riservati</span></p>
+        <p>&copy; 2026 gasparerichichi.com - <span data-i18n="footer_rights">Tutti i diritti riservati</span></p>
         <p style="margin-top: 8px; font-size: 13px;">web by <a href="https://www.instagram.com/_mkatteomarino" target="_blank" style="color: inherit; text-decoration: none;">Matteo Marino</a></p>
       </div>
     </footer>
@@ -394,6 +398,6 @@
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=1.1"></script>
 </body>
 </html>

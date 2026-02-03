@@ -16,6 +16,13 @@
   --shadow: 0 14px 46px rgba(0,0,0,.12);
 }
 
+@media (max-width: 768px) {
+  :root {
+    --pad: 20px;
+    --gap: 24px;
+  }
+}
+
 *{ box-sizing: border-box; }
 html,body{ height:100%; }
 body{
@@ -238,18 +245,14 @@ main{ padding-top: var(--topbarH); }
 }
 
 @media (min-width: 768px) {
+  /* Contact grid layout adjustments if needed */
   .contact-grid {
-    flex-direction: row;
-    gap: 24px;
+     /* We keep column layout as requested, centered */
+     align-items: center;
   }
   .contact-left-column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .contact-form-wrapper {
-    flex: 1;
+    width: 100%;
+    max-width: 600px; /* Limit width of contacts below form */
   }
 }
 
@@ -262,6 +265,8 @@ main{ padding-top: var(--topbarH); }
   flex-direction: column;
   gap: 12px;
 }
+
+/* Default boxed list items */
 .contact-list li {
   background: #fff;
   border: 1px solid var(--line);
@@ -272,6 +277,24 @@ main{ padding-top: var(--topbarH); }
 .contact-list li:hover {
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
+
+/* Clean variant (no box) */
+.contact-list.contact-list--clean li {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 4px 0;
+  text-align: center;
+}
+.contact-list.contact-list--clean li:hover {
+  box-shadow: none;
+  background: transparent;
+}
+.contact-list.contact-list--clean a, 
+.contact-list.contact-list--clean .contact-item-text {
+  justify-content: center; /* Center the icon and text */
+}
+
 .contact-list a, .contact-item-text {
   color: var(--fg);
   text-decoration: none;
@@ -360,6 +383,7 @@ main{ padding-top: var(--topbarH); }
   position: sticky;
   top: var(--topbarH);
   height: calc(100vh - var(--topbarH));
+  height: calc(100dvh - var(--topbarH));
   overflow: hidden; /* importante: nascondi overflow mentre trasliamo */
   background: var(--bg);
 }
@@ -387,7 +411,7 @@ main{ padding-top: var(--topbarH); }
 /* La rail è una riga orizzontale che trasliamo in X */
 .hscroll__rail{
   display: flex;
-  gap: var(--gap);
+  gap: 0; /* Removing gap to handle spacing via margins manually for robustness */
   padding: 16px 0 40px var(--pad);
   height: calc(100% - 86px);
   align-items: center;
@@ -396,19 +420,14 @@ main{ padding-top: var(--topbarH); }
   transform: translate3d(0,0,0);
 }
 
-/* Pseudo-element to ensure scroll spacing works cross-browser */
-/* We use negative margin to negate the gap, so the final space is exactly var(--pad) */
-.hscroll__rail::after {
-  content: "";
-  display: block;
-  flex: 0 0 var(--pad);
-  width: var(--pad);
-  height: 1px;
-  margin-left: calc(-1 * var(--gap)); 
+/* Spacer logic via margins - Most robust cross-browser method */
+.hscroll__rail > * {
+  margin-right: var(--gap);
 }
 
+/* The last element gets the padding as its right margin */
 .hscroll__rail > :last-child {
-  margin-right: 0;
+  margin-right: var(--pad);
 }
 
 /* Card */
@@ -428,6 +447,16 @@ main{ padding-top: var(--topbarH); }
   align-items: flex-start;
   
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+}
+
+/* Base resets for cross-browser consistency */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+input, button, textarea, select {
+  font: inherit;
 }
 
 .card__meta{
