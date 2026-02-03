@@ -227,10 +227,10 @@ main{ padding-top: var(--topbarH); }
 }
 
 .contact-info {
-  background: rgba(15,23,42,.03);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 30px;
+  /* Removed box styling for cleaner look */
+  background: transparent;
+  border: none;
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -247,12 +247,19 @@ main{ padding-top: var(--topbarH); }
 @media (min-width: 768px) {
   /* Contact grid layout adjustments if needed */
   .contact-grid {
-     /* We keep column layout as requested, centered */
-     align-items: center;
+     flex-direction: row;
+     align-items: flex-start;
+     justify-content: space-between;
+     gap: 64px;
   }
   .contact-left-column {
-    width: 100%;
-    max-width: 600px; /* Limit width of contacts below form */
+    flex: 1;
+    text-align: left;
+    max-width: none;
+  }
+  .contact-form-wrapper {
+    flex: 1;
+    width: auto !important; /* Override inline style */
   }
 }
 
@@ -284,7 +291,7 @@ main{ padding-top: var(--topbarH); }
   border: none;
   box-shadow: none;
   padding: 4px 0;
-  text-align: center;
+  text-align: left;
 }
 .contact-list.contact-list--clean li:hover {
   box-shadow: none;
@@ -292,7 +299,7 @@ main{ padding-top: var(--topbarH); }
 }
 .contact-list.contact-list--clean a, 
 .contact-list.contact-list--clean .contact-item-text {
-  justify-content: center; /* Center the icon and text */
+  justify-content: flex-start; /* Left align the icon and text */
 }
 
 .contact-list a, .contact-item-text {
@@ -425,9 +432,18 @@ main{ padding-top: var(--topbarH); }
   margin-right: var(--gap);
 }
 
-/* The last element gets the padding as its right margin */
+/* The last element has NO margin, the spacer handles the end padding */
 .hscroll__rail > :last-child {
-  margin-right: var(--pad);
+  margin-right: 0;
+}
+
+/* Explicit spacer to ensure scrollWidth captures the end space cross-browser */
+.hscroll__rail::after {
+  content: "";
+  display: block;
+  flex: 0 0 var(--pad);
+  width: var(--pad);
+  height: 1px;
 }
 
 /* Card */
@@ -963,24 +979,33 @@ input, button, textarea, select {
 }
 /* SHOP STYLES */
 .shop-product-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: block;
   min-height: calc(100vh - var(--topbarH));
   padding: 40px var(--pad);
   background-color: var(--bg);
-  gap: 24px;
+}
+
+.shop-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .shop-title {
   font-size: 56px;
   font-weight: 400;
   letter-spacing: -0.02em;
-  margin: 0;
+  margin: 0 0 48px 0;
   color: var(--fg);
-  text-align: center;
+  text-align: left;
   line-height: 1.05;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 32px;
+  justify-items: center;
 }
 
 @media (max-width: 767px) {
@@ -1050,6 +1075,83 @@ input, button, textarea, select {
   letter-spacing: 0.05em;
   margin: 0 0 24px 0;
   color: var(--fg);
+}
+
+/* Slider Styles */
+.product-slider {
+  position: relative;
+  width: 100%;
+  margin: 16px 0 24px;
+  overflow: hidden;
+}
+
+.product-slider-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth;
+}
+.product-slider-track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.product-slider-track .product-image {
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: center;
+  object-fit: contain;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fg);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  opacity: 0;
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.product-card:hover .slider-btn {
+  opacity: 1;
+}
+
+.slider-btn:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.slider-btn.prev { left: 10px; }
+.slider-btn.next { right: 10px; }
+
+/* Existing dots styles check */
+.product-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.1);
+  transition: background 0.2s;
+}
+.dot.active {
+  background: var(--fg);
 }
 
 .shop-btn,

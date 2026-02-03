@@ -265,6 +265,63 @@ if (window.location.pathname.includes('project.html')) {
     }
 }
 
+/* ===== Image Slider Logic ===== */
+function initSliders() {
+  document.querySelectorAll('.product-slider').forEach(slider => {
+    const track = slider.querySelector('.product-slider-track');
+    const prevBtn = slider.querySelector('.slider-btn.prev');
+    const nextBtn = slider.querySelector('.slider-btn.next');
+    const card = slider.closest('.product-card');
+    const dots = card ? card.querySelectorAll('.dot') : [];
+    
+    if (!track) return;
+
+    // Optional: Hide buttons if only 1 image (though CSS grid/flex handles it)
+    const images = track.querySelectorAll('.product-image');
+    if (images.length <= 1) {
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+      return;
+    }
+
+    // Scroll amount = 1 image width
+    const scrollAmount = () => track.clientWidth;
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        track.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+      });
+    }
+    
+    // Update dots on scroll
+    if (dots.length > 0) {
+      track.addEventListener('scroll', () => {
+        const scrollPos = track.scrollLeft;
+        const width = track.clientWidth;
+        const index = Math.round(scrollPos / width);
+        
+        dots.forEach((dot, i) => {
+          if (i === index) dot.classList.add('active');
+          else dot.classList.remove('active');
+        });
+      }, { passive: true });
+    }
+  });
+}
+
+// Init sliders if present
+if (document.querySelector('.product-slider')) {
+  initSliders();
+}
+
 /* ===== Language Switcher Logic ===== */
 const translations = {
   it: {
