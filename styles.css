@@ -389,11 +389,20 @@ main{ padding-top: var(--topbarH); }
   display: flex;
   gap: var(--gap);
   padding: 16px var(--pad) 40px var(--pad);
+  /* padding-right gestito via ::after per compatibilità cross-browser */
   height: calc(100% - 86px);
   align-items: center;
 
   will-change: transform;
   transform: translate3d(0,0,0);
+}
+
+.hscroll__rail::after {
+  content: "";
+  display: block;
+  flex: 0 0 3vw; /* Tiny extra space at the end */
+  width: 3vw;
+  height: 1px;
 }
 
 /* Card */
@@ -659,6 +668,10 @@ main{ padding-top: var(--topbarH); }
   #servizi .card {
     aspect-ratio: auto; /* Allow natural flow on mobile */
     min-height: 400px;
+  }
+  /* Ensure alignment on mobile */
+  .hscroll__rail {
+    align-items: flex-start; /* Align to top on mobile to avoid jumping */
   }
 }
 
