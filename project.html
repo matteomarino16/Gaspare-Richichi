@@ -6,13 +6,13 @@
   <title>Gaspare Richichi Design - Project</title>
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" href="favicon.png" type="image/png">
-  <link rel="stylesheet" href="styles.css?v=1.14" />
+  <link rel="stylesheet" href="styles.css?v=1.26" />
 </head>
 
 <body>
   <header class="topbar">
-    <a href="index.html" class="brand" style="text-decoration: none; color: inherit; display: block;">
-      <img src="logoheader.svg" alt="Gaspare Richichi Design" style="height: 24px; width: auto; display: block;">
+    <a href="index.html" class="brand" style="text-decoration: none; color: inherit; display: block; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 400; font-size: 18px; text-transform: uppercase; letter-spacing: -0.02em;">
+      Gaspare Richichi Design
     </a>
     <nav class="nav">
       <a href="shop.html" class="btn-icon" aria-label="Shop">
@@ -47,17 +47,24 @@
             <h1 class="project-title" id="project-title"></h1>
         </header>
 
-        <div class="project-description" id="project-description">
-            <!-- Full description injected via JS -->
-        </div>
+        <div class="project-content-grid">
+            <section class="project-gallery-container">
+                <div class="project-gallery" id="project-gallery">
+                    <!-- Images injected via JS -->
+                    <!-- Placeholder for now -->
+                    <div style="background: #eee; height: 400px; width: 100%; flex: 0 0 100%; display: flex; align-items: center; justify-content: center; color: #999;">
+                        <p data-i18n="images_coming_soon">Immagini in arrivo...</p>
+                    </div>
+                </div>
+                <div class="project-dots" id="project-dots">
+                    <!-- Dots injected via JS -->
+                </div>
+            </section>
 
-        <section class="project-gallery" id="project-gallery">
-            <!-- Images injected via JS -->
-            <!-- Placeholder for now -->
-            <div style="background: #eee; height: 400px; grid-column: 1/-1; display: flex; align-items: center; justify-content: center; color: #999;">
-                <p data-i18n="images_coming_soon">Immagini in arrivo...</p>
+            <div class="project-description" id="project-description">
+                <!-- Full description injected via JS -->
             </div>
-        </section>
+        </div>
     </article>
 
     <footer class="footer">
@@ -103,6 +110,6 @@
     <img src="" alt="Full screen view">
   </div>
 
-  <script src="app.js?v=1.1"></script>
+  <script src="app.js?v=1.4"></script>
 </body>
 </html>

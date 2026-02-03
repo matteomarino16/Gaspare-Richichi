@@ -143,7 +143,7 @@ const projectData = {
     year: "2022",
     category: "Interior / Branding",
     title: "Nicarè city apartments",
-    images: [] // To be uploaded
+    images: ["progetti/nicare.png"]
   },
   bambu: {
     year: "2025",
@@ -219,8 +219,71 @@ function initProjectPage() {
     }
     
     galleryEl.innerHTML = data.images.map(src => 
-      `<img src="${src}" alt="${data.title}" loading="lazy" onclick="openLightbox('${src}')">`
+      `<div class="gallery-item">
+        <img src="${src}" alt="${data.title}" loading="lazy" onclick="openLightbox('${src}')">
+       </div>`
     ).join('');
+
+    // Generate Dots
+    const dotsEl = document.getElementById('project-dots');
+    if (dotsEl && data.images.length > 1) {
+        // Add project specific class to dots container for styling
+        dotsEl.classList.add(`project-${projectId}`);
+        
+        dotsEl.innerHTML = data.images.map((_, i) => 
+            `<span class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>`
+        ).join('');
+
+        // Add Click to Scroll logic
+        const dots = dotsEl.querySelectorAll('.dot');
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const index = parseInt(dot.getAttribute('data-index'));
+                const images = galleryEl.querySelectorAll('img');
+                if (images[index]) {
+                    images[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+                }
+            });
+        });
+
+        // Add Scroll Spy logic
+        const updateDots = () => {
+            const scrollLeft = galleryEl.scrollLeft;
+            const width = galleryEl.clientWidth; // or img width
+            // Find which image is most visible
+            const index = Math.round(scrollLeft / width);
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        };
+
+        galleryEl.addEventListener('scroll', () => {
+            // Simple debounce or throttle could be added here if needed
+            window.requestAnimationFrame(updateDots);
+        });
+
+        // NEW: Align dots to the first image (center relative to image width)
+        const firstImg = galleryEl.querySelector('img');
+        if (firstImg) {
+            const alignDots = () => {
+                const w = firstImg.offsetWidth;
+                if (w > 0) {
+                    dotsEl.style.width = `${w}px`;
+                    dotsEl.style.justifyContent = 'center';
+                }
+            };
+            
+            if (firstImg.complete) {
+                alignDots();
+            } else {
+                firstImg.addEventListener('load', alignDots);
+            }
+            window.addEventListener('resize', alignDots);
+        }
+    } else if (dotsEl) {
+        dotsEl.style.display = 'none';
+    }
   }
 }
 

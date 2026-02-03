@@ -11,7 +11,7 @@
 
   --cardW: 60vw; /* Reduced width for cards */
   --cardH: 100%; /* Fill the rail height */
-  --radius: 22px;
+  --radius: 40px;
 
   --shadow: 0 14px 46px rgba(0,0,0,.12);
 }
@@ -1213,33 +1213,111 @@ input, button, textarea, select {
   color: var(--fg);
 }
 
+/* Grid Layout for Content */
+.project-content-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
 .project-description {
   font-size: 1.125rem;
   line-height: 1.6;
   color: var(--muted);
   max-width: 800px;
-  margin-bottom: 60px;
   white-space: pre-line;
 }
 
-.project-gallery {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
+.project-gallery-container {
+    position: relative;
+    width: 100%;
 }
 
-.project-gallery img {
+.project-gallery {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 0; /* No gap because items are 100% */
+  scrollbar-width: none; /* Firefox */
+  border-radius: var(--radius);
+}
+.project-gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-item {
+  flex: 0 0 100%;
   width: 100%;
+  scroll-snap-align: start; /* Align to start/left */
+  scroll-snap-stop: always;
+  display: flex;
+  justify-content: flex-start; /* Align image to left */
+}
+
+.gallery-item img {
+  width: auto; /* Natural width */
+  max-width: 100%; /* Limit to container */
   height: auto;
+  max-height: 60vh;
   display: block;
   border-radius: var(--radius);
-  background-color: rgba(15,23,42,.03);
-  object-fit: cover;
+  /* background-color: rgba(15,23,42,.03); REMOVED */
+  object-fit: cover; /* Default for photos */
   cursor: pointer;
   transition: transform 0.3s ease;
 }
-.project-gallery img:hover {
-  transform: scale(1.02);
+
+/* Specific overrides can be handled if needed, but width: auto usually fixes the "grey bar" issue */
+.project-gallery img:hover,
+  .gallery-item img:hover {
+    transform: none;
+  }
+
+/* Dots for Project Gallery */
+.project-dots {
+  display: flex;
+  justify-content: flex-start; /* Align dots to left (title) */
+  gap: 8px;
+  margin-top: 16px;
+  padding-bottom: 8px;
+}
+.project-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.1);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.project-dots .dot.active {
+  background: var(--fg);
+}
+
+@media (min-width: 768px) {
+  /* Remove side-by-side grid, stack everything as requested */
+  .project-content-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+  
+  .project-gallery {
+    margin-bottom: 0;
+  }
+
+  .project-gallery .gallery-item img {
+     max-height: 70vh;
+  }
+  /* Product Gallery specific styles */
+  .project-gallery.gallery-product .gallery-item img {
+      object-fit: contain;
+  }
+  
+  /* Reset sticky behavior since it's now stacked */
+  .project-description {
+    position: static;
+  }
 }
 
 /* Lightbox */
@@ -1268,7 +1346,7 @@ input, button, textarea, select {
   object-fit: contain;
   transform: scale(0.95);
   transition: transform 0.3s ease;
-  border-radius: 4px;
+  border-radius: var(--radius); /* Rounded corners for lightbox image too */
 }
 .lightbox.active img {
   transform: scale(1);
@@ -1303,27 +1381,9 @@ input, button, textarea, select {
   opacity: 1;
 }
 
+/* Removed grid layout overrides since we use flex slider now */
 @media (min-width: 768px) {
-  .project-gallery {
-      grid-template-columns: repeat(2, 1fr);
-  }
-  .project-gallery img:first-child {
-      grid-column: 1 / -1; /* First image full width */
-      max-height: 80vh;
-      object-fit: cover;
-  }
-  /* Product Gallery specific styles */
-  .project-gallery.gallery-product img:first-child {
-      object-fit: contain;
-      max-height: 70vh;
-      background: transparent;
-      width: auto;
-      margin: 0 auto;
-      max-width: 100%;
-  }
-  .project-gallery.gallery-product img {
-      object-fit: contain;
-  }
+  /* Keep empty or add specific desktop adjustments if needed */
 }
 /* Project Card Backgrounds */
 .card--project {
@@ -1373,4 +1433,12 @@ input, button, textarea, select {
 }
 .card--project:hover::after {
   background: rgba(0,0,0,0.3); /* Lighten slightly on hover */
+}
+
+/* Specific Project Overrides */
+.card--nicare::before {
+  filter: grayscale(100%);
+}
+.card--nicare::after {
+  background: rgba(0,0,0,0.5); /* Slightly darker overlay for better text contrast */
 }
