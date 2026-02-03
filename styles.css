@@ -765,7 +765,7 @@ input, button, textarea, select {
 .toolkit-section {
   padding: 100px var(--pad);
   border-bottom: 1px solid var(--line);
-  background: #fafafa; /* Slightly different bg to separate sections */
+  background: #ffffff;
 }
 .toolkit-inner {
   max-width: 1200px;
