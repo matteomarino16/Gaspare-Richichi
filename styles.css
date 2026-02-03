@@ -105,7 +105,7 @@ main{ padding-top: var(--topbarH); }
     width: 100%;
     flex-direction: column;
     justify-content: flex-start; /* Push content to top */
-    gap: 12px; /* Reduced gap to match screenshot */
+    gap: 20px; /* Restored comfortable gap */
   }
   .hero__img {
     order: 1;
@@ -119,8 +119,8 @@ main{ padding-top: var(--topbarH); }
     overflow: visible;
   }
   .hero__photo {
-    max-height: 40vh; /* Slightly reduced for better proportion */
-    max-width: 100%;
+    max-height: 50vh; /* Increased height for better impact */
+    max-width: 90%; /* Prevent full width to keep right-bias visible */
     width: auto;
     height: auto;
     object-fit: contain;
