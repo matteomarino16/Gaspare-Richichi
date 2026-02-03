@@ -719,7 +719,7 @@ input, button, textarea, select {
   #servizi .card {
     width: var(--cardW);
     min-height: 420px; /* Uniform height for all cards on mobile */
-    height: 420px;
+    height: auto; /* Allow expansion */
     aspect-ratio: auto;
     display: flex;
     flex-direction: column;
@@ -727,7 +727,7 @@ input, button, textarea, select {
   }
   /* Ensure alignment on mobile */
   .hscroll__rail {
-    align-items: flex-start; /* Align to top on mobile to avoid jumping */
+    align-items: stretch; /* Stretch all cards to the height of the tallest one */
   }
 }
 
@@ -763,7 +763,7 @@ input, button, textarea, select {
   #progetti .card {
     width: var(--cardW);
     min-height: 420px; /* Uniform height for all cards on mobile */
-    height: 420px;
+    height: auto;
     aspect-ratio: auto;
   }
 }
@@ -880,6 +880,21 @@ input, button, textarea, select {
 }
 
 /* Toolkit Staggered Animation */
+@media (max-width: 768px) {
+  .toolkit-section {
+    padding: 60px var(--pad);
+  }
+  .logo-grid {
+    gap: 16px;
+  }
+  .tool-item {
+    width: 80px;
+    height: 80px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+}
+
 @keyframes fadeUpLogos {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
