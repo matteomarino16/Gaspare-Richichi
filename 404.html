@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pagina non trovata - Gaspare Richichi Design</title>
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="styles.css?v=1.30" />
+  <style>
+    .error-container {
+      height: calc(100vh - var(--topbarH));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+    .error-code {
+      font-size: clamp(80px, 15vw, 120px);
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 24px;
+      color: var(--fg);
+    }
+    .error-msg {
+      font-size: 24px;
+      margin-bottom: 32px;
+      color: var(--muted);
+    }
+    .back-btn {
+      padding: 12px 24px;
+      background: var(--fg);
+      color: var(--bg);
+      text-decoration: none;
+      border-radius: 999px;
+      transition: opacity 0.3s;
+    }
+    .back-btn:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 400; font-size: 18px; text-transform: uppercase; letter-spacing: -0.02em;">
+      GASPARE RICHICHI DESIGN 
+    </div>
+    <nav class="nav">
+      <a href="index.html" class="btn-icon" aria-label="Torna alla Home">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="error-container">
+      <h1 class="error-code">404</h1>
+      <p class="error-msg">Pagina non trovata</p>
+      <a href="index.html" class="back-btn">Torna alla Home</a>
+    </div>
+  </main>
+</body>
+</html>
