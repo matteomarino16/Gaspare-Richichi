@@ -918,30 +918,28 @@ input, button, textarea, select {
     visibility: visible;
   }
   
-  /* Row 1: Tooltips Above */
-  .tool-item:nth-child(-n+4) .tool-name {
-    bottom: auto;
-    top: -32px;
-  }
-  /* Show state position adjustment if needed, but fixed position is fine */
-  .tool-item:nth-child(-n+4).active-tooltip .tool-name {
-    top: -36px; /* Slight lift animation */
+  /* Tooltips Position - Unified Below for Mobile */
+  /* Ensure active item is on top of others (z-index fix for stacking context) */
+  .tool-item.active-tooltip {
+    z-index: 100;
   }
 
-  .tool-item:nth-child(-n+4) .tool-name::before {
-    top: auto;
-    bottom: -4px;
-    border-bottom: 4px solid transparent;
-    border-top: 4px solid rgba(0, 0, 0, 0.8);
-  }
-  
-  /* Row 2: Tooltips Below */
-  .tool-item:nth-child(n+5) .tool-name {
+  /* All Tooltips Below */
+  .tool-item .tool-name {
     top: auto;
     bottom: -32px;
   }
-  .tool-item:nth-child(n+5).active-tooltip .tool-name {
+  
+  .tool-item.active-tooltip .tool-name {
     bottom: -36px; /* Slight drop animation */
+  }
+
+  /* Ensure arrow points up (default behavior, but ensuring no overrides) */
+  .tool-item .tool-name::before {
+    top: -4px;
+    bottom: auto;
+    border-bottom: 4px solid rgba(0, 0, 0, 0.8);
+    border-top: none;
   }
 }
 
