@@ -97,33 +97,34 @@ main{ padding-top: var(--topbarH); }
     min-height: calc(100vh - var(--topbarH));
     min-height: calc(100dvh - var(--topbarH));
     height: auto; 
-    padding: 0 var(--pad) 10px; /* Removed top padding to reduce gap with header */
-    align-items: stretch;
+    padding: 24px var(--pad) 40px; /* Top padding for spacing, bottom for scroll */
+    align-items: flex-start; /* Align content to top instead of center/stretch */
   }
   .hero__inner {
-    height: 100%; /* Ensure inner container fills the hero */
+    height: auto; /* Allow natural height */
+    width: 100%;
     flex-direction: column;
-    justify-content: center;
-    gap: 16px; /* Reduced gap between elements */
+    justify-content: flex-start; /* Push content to top */
+    gap: 24px;
   }
   .hero__img {
     order: 1;
     margin: 0;
-    flex: 0 1 auto; /* Don't force growth, let it size to content */
+    flex: 0 0 auto;
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 0; /* Critical for flex child scrolling/shrinking */
+    align-items: flex-start;
+    min-height: 0;
     padding-bottom: 0;
-    overflow: hidden;
+    overflow: visible;
   }
   .hero__photo {
-    max-height: 50vh; /* Limit height to ensure text is visible below */
+    max-height: 42vh; /* Reduced height to show text */
     max-width: 100%;
     width: auto;
     height: auto;
     object-fit: contain;
-    object-position: center;
+    object-position: center top;
   }
   .hero__content {
     order: 2;
