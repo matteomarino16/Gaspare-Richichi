@@ -1605,8 +1605,11 @@ input, button, textarea, select {
 /* Specific Project Overrides */
 /* Nicare specific overrides removed to match other cards (no grayscale) */
 
-/* --- New Download Button Styles --- */
+/* --- New Download Button Styles (Uiverse Na3ar-17 Adapted) --- */
 .dl-container {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1614,103 +1617,206 @@ input, button, textarea, select {
 }
 
 .dl-label {
-  position: relative;
+  background-color: transparent;
+  border: 2px solid #000;
   display: flex;
   align-items: center;
-  border-radius: 999px;
-  background-color: #000;
-  color: #fff;
-  padding: 14px 24px;
+  justify-content: center;
+  border-radius: 50%;
+  width: 59px;
+  height: 59px;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  overflow: hidden;
-  min-width: 200px;
-  justify-content: center; /* Center content */
-  gap: 12px;
+  transition: all 0.4s ease;
+  padding: 5px;
+  position: relative;
   user-select: none;
   -webkit-user-select: none;
 }
 
-.dl-label:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+.dl-label::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  width: 8px;
+  height: 8px;
+  transition: all 0.4s ease;
+  border-radius: 100%;
+  margin: auto;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .dl-input {
   display: none;
 }
 
+.dl-title {
+  display: none;
+}
+
+.dl-title:last-child {
+  opacity: 0;
+  visibility: hidden;
+}
+
 .dl-circle {
-  position: relative;
-  width: 24px;
-  height: 24px;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  background-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s ease;
+  position: relative;
+  box-shadow: 0 0 0 0 rgb(255, 255, 255);
+  overflow: hidden;
 }
 
 .dl-icon {
-  width: 20px;
-  height: 20px;
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease;
   stroke: #fff;
   stroke-width: 2;
-  transition: all 0.4s ease;
 }
 
-.dl-text-wrapper {
-  position: relative;
-  height: 20px;
-  width: 120px; /* Fixed width for text area to prevent jumping */
-  overflow: hidden;
-  display: flex;
-  justify-content: center; /* Center text in wrapper */
-  align-items: center;
-}
-
-.dl-title {
-  font-size: 16px;
-  font-weight: 500;
-  margin: 0;
+.dl-square {
+  aspect-ratio: 1;
+  width: 15px;
+  border-radius: 2px;
+  background-color: #fff;
+  opacity: 0;
+  visibility: hidden;
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   transition: all 0.4s ease;
-  white-space: nowrap;
 }
 
-.title-download {
-  opacity: 1;
-  transform: translateY(0);
+.dl-circle::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #333; /* Dark grey for fill animation */
+  width: 100%;
+  height: 0;
+  transition: all 0.4s ease;
 }
 
-.title-open {
+/* Interaction States */
+.dl-label:has(.dl-input:checked) {
+  width: 59px;
+  animation: installed 0.4s ease 3.5s forwards;
+}
+
+.dl-label:has(.dl-input:checked)::before {
+  animation: rotate 3s ease-in-out 0.4s forwards;
+}
+
+.dl-input:checked + .dl-circle {
+  animation: 
+    pulse 1s forwards;
+  rotate: 180deg;
+}
+
+.dl-input:checked + .dl-circle::before {
+  animation: installing 3s ease-in-out forwards;
+}
+
+.dl-input:checked + .dl-circle .dl-icon {
   opacity: 0;
-  transform: translateY(30px);
+  visibility: hidden;
 }
 
-/* Checked State */
-.dl-input:checked ~ .dl-circle {
-  transform: scale(1.1);
-}
-
-.dl-input:checked ~ .dl-circle .dl-icon {
-  transform: rotate(360deg);
-}
-
-.dl-input:checked ~ .dl-text-wrapper .title-download {
-  opacity: 0;
-  transform: translateY(-30px);
-}
-
-.dl-input:checked ~ .dl-text-wrapper .title-open {
+.dl-input:checked ~ .dl-circle .dl-square {
   opacity: 1;
-  transform: translateY(0);
+  visibility: visible;
+}
+
+.dl-input:checked ~ .dl-title {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.dl-input:checked ~ .dl-title:last-child {
+  animation: showInstalledMessage 0.4s ease 3.5s forwards;
+}
+
+@keyframes pulse { 
+  0% { 
+    scale: 0.95; 
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); 
+  } 
+  70% { 
+    scale: 1; 
+    box-shadow: 0 0 0 16px rgba(255, 255, 255, 0); 
+  } 
+  100% { 
+    scale: 0.95; 
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); 
+  } 
+} 
+
+@keyframes installing { 
+  from { 
+    height: 0; 
+  } 
+  to { 
+    height: 100%; 
+  } 
+} 
+
+@keyframes rotate { 
+  0% { 
+    transform: rotate(-90deg) translate(27px) rotate(0); 
+    opacity: 1; 
+    visibility: visible; 
+  } 
+  99% { 
+    transform: rotate(270deg) translate(27px) rotate(270deg); 
+    opacity: 1; 
+    visibility: visible; 
+  } 
+  100% { 
+    opacity: 0; 
+    visibility: hidden; 
+  } 
+} 
+
+@keyframes installed { 
+  100% { 
+    width: 59px; 
+    border-color: #000;
+  } 
+} 
+
+@keyframes circleDelete { 
+  100% { 
+    opacity: 0; 
+    visibility: hidden; 
+  } 
+} 
+
+@keyframes showInstalledMessage { 
+  100% { 
+    opacity: 1; 
+    visibility: visible; 
+    right: 56px; 
+  } 
 }
 
 @media (max-width: 767px) {
-  .dl-label {
-    width: 100%;
-    max-width: 300px;
-  }
+  /* Mobile specific overrides if needed */
 }

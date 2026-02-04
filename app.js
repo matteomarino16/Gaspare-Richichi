@@ -521,7 +521,7 @@ const translations = {
 
     // CV
     download_title: "Scarica Portfolio",
-    cv_download_text: "Scarica Portfolio",
+    cv_download_text: "Scarica ora",
     
     // Contacts
     contacts_title: "Contatti",
@@ -631,7 +631,7 @@ const translations = {
 
     // CV
     download_title: "Download Portfolio",
-    cv_download_text: "Download Portfolio",
+    cv_download_text: "Download now",
     
     // Contacts
     contacts_title: "Contact",
@@ -759,7 +759,8 @@ document.addEventListener('DOMContentLoaded', () => {
       projectCards.forEach(card => projectObserver.observe(card));
     }
 
-    // CV Button Animation
+    // CV Button Animation (Removed)
+    /*
     const cvBtn = document.querySelector('.cv-btn');
     if (cvBtn) {
       const cvObserver = new IntersectionObserver((entries) => {
@@ -773,6 +774,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, { threshold: 0.5 });
       cvObserver.observe(cvBtn);
     }
+    */
   }
 });
 
