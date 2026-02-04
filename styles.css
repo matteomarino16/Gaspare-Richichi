@@ -894,45 +894,9 @@ input, button, textarea, select {
     border-radius: 16px;
   }
   
-  /* Mobile Tooltips: Hidden by default, visible on click (.active-tooltip) */
+  /* Mobile Tooltips: Completely Hidden */
   .tool-item .tool-name {
-    opacity: 0;
-    visibility: hidden;
-    font-size: 9px;
-    padding: 4px 6px;
-    width: max-content;
-    max-width: 150%;
-    pointer-events: none;
-    transition: all 0.2s ease;
-  }
-  
-  .tool-item.active-tooltip .tool-name {
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  /* Tooltips Position - Unified Below for Mobile */
-  /* Ensure active item is on top of others (z-index fix for stacking context) */
-  .tool-item.active-tooltip {
-    z-index: 100;
-  }
-
-  /* All Tooltips Above on Mobile */
-  .tool-item .tool-name {
-    bottom: auto;
-    top: -32px;
-  }
-  
-  .tool-item.active-tooltip .tool-name {
-    top: -45px; /* Slight lift animation */
-  }
-
-  /* Ensure arrow points down */
-  .tool-item .tool-name::before {
-    top: auto;
-    bottom: -4px;
-    border-top: 4px solid rgba(0, 0, 0, 0.8);
-    border-bottom: none;
+    display: none !important;
   }
 }
 
@@ -1819,4 +1783,113 @@ input, button, textarea, select {
 
 @media (max-width: 767px) {
   /* Mobile specific overrides if needed */
+}
+
+/* ===== About Text Lines ===== */
+.about-line {
+  display: block;
+}
+@media (max-width: 768px) {
+  .about-line {
+    margin-bottom: 0;
+    display: block;
+  }
+  .about-line:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* ===== DOWNLOAD BUTTON (UIVERSE ADAPTED) ===== */
+.download-button {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+  transition: filter 250ms;
+  user-select: none;
+  touch-action: manipulation;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin: 0 auto; /* Centered */
+}
+
+.shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: hsl(0deg 0% 0% / 0.25);
+  will-change: transform;
+  transform: translateY(2px);
+  transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: linear-gradient(
+    to left,
+    hsl(340deg 100% 16%) 0%,
+    hsl(340deg 100% 32%) 8%,
+    hsl(340deg 100% 32%) 92%,
+    hsl(340deg 100% 16%) 100%
+  );
+}
+
+.front {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  color: white;
+  background: hsl(345deg 100% 47%);
+  will-change: transform;
+  transform: translateY(-4px);
+  transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+  font-family: 'Helvetica Now Display', sans-serif;
+  font-weight: 500;
+}
+
+.download-button:hover {
+  filter: brightness(110%);
+}
+
+.download-button:hover .front {
+  transform: translateY(-6px);
+  transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.download-button:active .front {
+  transform: translateY(-2px);
+  transition: transform 34ms;
+}
+
+.download-button:hover .shadow {
+  transform: translateY(4px);
+  transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.download-button:active .shadow {
+  transform: translateY(1px);
+  transition: transform 34ms;
+}
+
+.download-button:focus:not(:focus-visible) {
+  outline: none;
 }

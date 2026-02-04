@@ -447,7 +447,7 @@ const translations = {
     
     // About
     about_title: "Chi sono",
-    about_text: "Sono Gaspare Richichi, un designer con formazione magistrale specializzato in Product, Interior e Graphic Design.<br>Aiuto brand, aziende e privati a trasformare le loro idee in qualcosa di concreto.<br>Ogni progetto nasce dall’ascolto, dalla ricerca e dall’attenzione al dettaglio, per arrivare a soluzioni su misura capaci di raccontare una storia e generare valore reale.",
+    about_text: "<span class='about-line'>Sono Gaspare Richichi, un designer con formazione magistrale specializzato in Product, Interior e Graphic Design.</span><span class='about-line'>Aiuto brand, aziende e privati a trasformare le loro idee in qualcosa di concreto.</span><span class='about-line'>Ogni progetto nasce dall’ascolto, dalla ricerca e dall’attenzione al dettaglio, per arrivare a soluzioni su misura capaci di raccontare una storia e generare valore reale.</span>",
     
     // Services
     services_title: "Servizi",
@@ -556,7 +556,7 @@ const translations = {
     
     // About
     about_title: "About me",
-    about_text: "I am Gaspare Richichi, a designer with a master's degree specializing in Product, Interior, and Graphic Design.<br>I help brands, companies, and individuals transform their ideas into something concrete.<br>Every project is born from listening, research, and attention to detail, arriving at tailored solutions capable of telling a story and generating real value.",
+    about_text: "<span class='about-line'>I am Gaspare Richichi, a designer with a master's degree specializing in Product, Interior, and Graphic Design.</span><span class='about-line'>I help brands, companies, and individuals transform their ideas into something concrete.</span><span class='about-line'>Every project is born from listening, research, and attention to detail, arriving at tailored solutions capable of telling a story and generating real value.</span>",
     
     // Services
     services_title: "Services",
@@ -706,34 +706,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Mobile Toolkit Click Logic
-  const toolItems = document.querySelectorAll('.tool-item');
-  if (toolItems.length > 0) {
-    toolItems.forEach(item => {
-      item.addEventListener('click', function(e) {
-        // Only active on mobile
-        if (window.innerWidth > 768) return;
-        
-        // If already active, remove it
-        if (this.classList.contains('active-tooltip')) {
-          this.classList.remove('active-tooltip');
-        } else {
-          // Remove from all others first (exclusive behavior)
-          toolItems.forEach(el => el.classList.remove('active-tooltip'));
-          // Add to clicked
-          this.classList.add('active-tooltip');
-        }
-      });
-    });
-    
-    // Close tooltips when clicking outside
-    document.addEventListener('click', function(e) {
-      if (window.innerWidth > 768) return;
-      if (!e.target.closest('.tool-item')) {
-        toolItems.forEach(el => el.classList.remove('active-tooltip'));
-      }
-    });
-  }
+  // Mobile Toolkit Click Logic removed
 
   // Mobile Project Hover Effect (IntersectionObserver)
   if (window.innerWidth < 768) {
