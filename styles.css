@@ -134,9 +134,10 @@ main{ padding-top: var(--topbarH); }
     padding-bottom: 10px;
   }
   .hero .hero__title {
-    font-size: clamp(20px, 5vw, 24px); /* Reduced size to match screenshot */
+    font-size: clamp(36px, 8vw, 42px); /* Scaled down from desktop 66px */
     max-width: 100%;
-    line-height: 1.1;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
   }
 }
 
@@ -725,25 +726,7 @@ input, button, textarea, select {
   margin-bottom: 12px;
 }
 
-@media (max-width: 768px) {
-  #servizi {
-    --cardW: 85vw; /* On mobile, keep them readable */
-    --cardH: auto;
-  }
-  #servizi .card {
-    width: var(--cardW);
-    min-height: 420px; /* Uniform height for all cards on mobile */
-    height: auto; /* Allow expansion */
-    aspect-ratio: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-  /* Ensure alignment on mobile */
-  .hscroll__rail {
-    align-items: stretch; /* Stretch all cards to the height of the tallest one */
-  }
-}
+/* Reverted to default mobile behavior */
 
 /* ===== Progetti Section Overrides ===== */
 #progetti {
@@ -934,22 +917,22 @@ input, button, textarea, select {
     z-index: 100;
   }
 
-  /* All Tooltips Below */
+  /* All Tooltips Above on Mobile */
   .tool-item .tool-name {
-    top: auto;
-    bottom: -32px;
+    bottom: auto;
+    top: -32px;
   }
   
   .tool-item.active-tooltip .tool-name {
-    bottom: -36px; /* Slight drop animation */
+    top: -45px; /* Slight lift animation */
   }
 
-  /* Ensure arrow points up (default behavior, but ensuring no overrides) */
+  /* Ensure arrow points down */
   .tool-item .tool-name::before {
-    top: -4px;
-    bottom: auto;
-    border-bottom: 4px solid rgba(0, 0, 0, 0.8);
-    border-top: none;
+    top: auto;
+    bottom: -4px;
+    border-top: 4px solid rgba(0, 0, 0, 0.8);
+    border-bottom: none;
   }
 }
 
@@ -997,7 +980,6 @@ input, button, textarea, select {
   }
 
   /* 2. Responsive Card Sizing for Horizontal Scroll */
-  #servizi .card,
   #progetti .card {
     /* Make cards responsive but keep them in horizontal rail */
     width: 85vw;
@@ -1067,7 +1049,8 @@ input, button, textarea, select {
   margin: 0;
 }
 
-.cv-btn:hover {
+.cv-btn:hover,
+.cv-btn.active {
   width: 290px;
   background-color: #000000;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
@@ -1087,7 +1070,8 @@ input, button, textarea, select {
   z-index: 2;
 }
 
-.cv-btn:hover .cv-icon-wrapper {
+.cv-btn:hover .cv-icon-wrapper,
+.cv-btn.active .cv-icon-wrapper {
   background-color: #ffffff;
   transform: rotate(360deg);
 }
@@ -1099,7 +1083,8 @@ input, button, textarea, select {
   transition: all 0.4s;
 }
 
-.cv-btn:hover .cv-icon {
+.cv-btn:hover .cv-icon,
+.cv-btn.active .cv-icon {
   color: #000000;
 }
 
@@ -1116,10 +1101,31 @@ input, button, textarea, select {
   transition-delay: 0.1s;
 }
 
-.cv-btn:hover .cv-text {
+.cv-btn:hover .cv-text,
+.cv-btn.active .cv-text {
   opacity: 1;
   visibility: visible;
 }
+
+@media (max-width: 767px) {
+  .cv-btn {
+    width: 290px;
+    background-color: #000000;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+  .cv-btn .cv-icon-wrapper {
+    background-color: #ffffff;
+    transform: rotate(360deg);
+  }
+  .cv-btn .cv-icon {
+    color: #000000;
+  }
+  .cv-btn .cv-text {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
 /* SHOP STYLES */
 .shop-product-section {
   display: block;
@@ -1538,6 +1544,19 @@ input, button, textarea, select {
   background: #000; /* Fallback */
   border: none; /* Remove border if image is there */
 }
+.card--project h3,
+.card--project p {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.card--project:hover h3,
+.card--project:hover p,
+.card--project.hover-active h3,
+.card--project.hover-active p {
+  opacity: 1;
+  transform: translateY(0);
+}
 .card--project p {
   color: rgba(255,255,255,0.9); /* Override muted color */
 }
@@ -1559,7 +1578,10 @@ input, button, textarea, select {
   background-size: cover;
   background-position: center;
   z-index: -2;
-  transition: transform 0.6s ease;
+  transition: transform 0.6s ease, filter 0.4s ease;
+  will-change: transform, filter;
+  transform: translateZ(0); /* Force GPU */
+  backface-visibility: hidden;
 }
 .card--project::after {
   content: "";
@@ -1571,17 +1593,124 @@ input, button, textarea, select {
 }
 
 /* Hover effects */
-.card--project:hover::before {
-  transform: scale(1.05); /* Zoom in slightly */
+.card--project:hover::before,
+.card--project.hover-active::before {
+  transform: scale(1.05) translateZ(0); /* Keep GPU active */
+  filter: blur(8px);
 }
 .card--project:hover::after {
-  background: rgba(0,0,0,0.3); /* Lighten slightly on hover */
+  background: rgba(0,0,0,0.6); /* Darker on hover to make text pop */
 }
 
 /* Specific Project Overrides */
-.card--nicare::before {
-  filter: grayscale(100%);
+/* Nicare specific overrides removed to match other cards (no grayscale) */
+
+/* --- New Download Button Styles --- */
+.dl-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
-.card--nicare::after {
-  background: rgba(0,0,0,0.5); /* Slightly darker overlay for better text contrast */
+
+.dl-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 999px;
+  background-color: #000;
+  color: #fff;
+  padding: 14px 24px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  min-width: 200px;
+  justify-content: center; /* Center content */
+  gap: 12px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.dl-label:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+}
+
+.dl-input {
+  display: none;
+}
+
+.dl-circle {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dl-icon {
+  width: 20px;
+  height: 20px;
+  stroke: #fff;
+  stroke-width: 2;
+  transition: all 0.4s ease;
+}
+
+.dl-text-wrapper {
+  position: relative;
+  height: 20px;
+  width: 120px; /* Fixed width for text area to prevent jumping */
+  overflow: hidden;
+  display: flex;
+  justify-content: center; /* Center text in wrapper */
+  align-items: center;
+}
+
+.dl-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  position: absolute;
+  transition: all 0.4s ease;
+  white-space: nowrap;
+}
+
+.title-download {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.title-open {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Checked State */
+.dl-input:checked ~ .dl-circle {
+  transform: scale(1.1);
+}
+
+.dl-input:checked ~ .dl-circle .dl-icon {
+  transform: rotate(360deg);
+}
+
+.dl-input:checked ~ .dl-text-wrapper .title-download {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.dl-input:checked ~ .dl-text-wrapper .title-open {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 767px) {
+  .dl-label {
+    width: 100%;
+    max-width: 300px;
+  }
 }

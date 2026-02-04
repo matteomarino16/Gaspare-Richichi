@@ -734,4 +734,71 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Mobile Project Hover Effect (IntersectionObserver)
+  if (window.innerWidth < 768) {
+    const projectCards = document.querySelectorAll('.card--project');
+    
+    if (projectCards.length > 0) {
+      const observerOptions = {
+        root: null, // viewport
+        rootMargin: '0px -15% 0px -15%', // Activate when centered (narrower trigger zone)
+        threshold: 0.6 // 60% visibility required
+      };
+
+      const projectObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('hover-active');
+          } else {
+            entry.target.classList.remove('hover-active');
+          }
+        });
+      }, observerOptions);
+
+      projectCards.forEach(card => projectObserver.observe(card));
+    }
+
+    // CV Button Animation
+    const cvBtn = document.querySelector('.cv-btn');
+    if (cvBtn) {
+      const cvObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          } else {
+            entry.target.classList.remove('active');
+          }
+        });
+      }, { threshold: 0.5 });
+      cvObserver.observe(cvBtn);
+    }
+  }
+});
+
+/* ===== Download Button Logic ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  const dlInput = document.querySelector('.dl-input');
+  const dlLabel = document.querySelector('.dl-label');
+
+  if (dlInput && dlLabel) {
+    dlInput.addEventListener('change', () => {
+      if (dlInput.checked) {
+        // Trigger Download
+        const link = document.createElement('a');
+        link.href = 'portfolio-GR.pdf';
+        link.download = 'Portfolio_Gaspare_Richichi.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    });
+    
+    dlLabel.addEventListener('click', (e) => {
+      if (dlInput.checked) {
+        e.preventDefault(); // Prevent unchecking
+        window.open('portfolio-GR.pdf', '_blank');
+      }
+    });
+  }
 });
