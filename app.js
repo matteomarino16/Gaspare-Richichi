@@ -82,9 +82,10 @@ let lenis;
 
 if (!isMobile) {
   lenis = new Lenis({
-    lerp: 0.1,
+    lerp: 0.075,
     smoothWheel: true,
-    touchMultiplier: 1.5 
+    wheelMultiplier: 1.2,
+    touchMultiplier: 1.8 
   });
 
   function raf(time) {

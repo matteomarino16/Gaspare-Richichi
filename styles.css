@@ -624,6 +624,13 @@ input, button, textarea, select {
 
 /* ===== Animazioni Extra ===== */
 
+/* Optimization for horizontal scroll rail */
+.hscroll__rail {
+  will-change: transform;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
 /* 1. Scroll Reveal */
 .reveal {
   opacity: 0;
@@ -636,8 +643,10 @@ input, button, textarea, select {
   transform: translateY(0);
 }
 
-/* 2. Card Hover */
+/* Card hardware acceleration */
 .card {
+  will-change: transform;
+  transform: translateZ(0); /* Trigger GPU */
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
 }
 .card:hover {
