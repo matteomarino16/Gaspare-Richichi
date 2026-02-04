@@ -165,6 +165,67 @@ overlay.addEventListener("click", (e) => {
   }
 });
 
+/* ===== COOKIE BANNER LOGIC ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  const cookieBanner = document.getElementById('cookie-banner');
+  
+  // Check if user has already made a choice
+  const cookieConsent = localStorage.getItem('cookieConsent');
+
+  // If no choice made yet, show banner after a small delay
+  if (!cookieConsent) {
+    // Dynamically create banner if not in HTML (for easier maintenance across pages)
+    if (!cookieBanner) {
+      createCookieBanner();
+    } else {
+      setTimeout(() => {
+        cookieBanner.classList.add('visible');
+      }, 1000);
+    }
+  }
+
+  function createCookieBanner() {
+    const banner = document.createElement('div');
+    banner.id = 'cookie-banner';
+    banner.className = 'cookie-banner';
+    banner.innerHTML = `
+      <div class="cookie-content">
+        <p class="cookie-text">
+          Utilizziamo i cookie per migliorare la tua esperienza. Continuando a navigare accetti la nostra <a href="cookies.html">Cookie Policy</a>.
+        </p>
+        <div class="cookie-buttons">
+          <button id="cookie-reject" class="cookie-btn cookie-btn--reject">Rifiuta</button>
+          <button id="cookie-accept" class="cookie-btn cookie-btn--accept">Accetta</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(banner);
+    
+    // Re-select buttons after creation
+    const newAcceptBtn = document.getElementById('cookie-accept');
+    const newRejectBtn = document.getElementById('cookie-reject');
+    
+    newAcceptBtn.addEventListener('click', () => handleConsent('accepted'));
+    newRejectBtn.addEventListener('click', () => handleConsent('rejected'));
+    
+    // Show banner
+    setTimeout(() => {
+      banner.classList.add('visible');
+    }, 1000);
+  }
+
+  function handleConsent(status) {
+    localStorage.setItem('cookieConsent', status);
+    const banner = document.getElementById('cookie-banner');
+    banner.classList.remove('visible');
+    
+    // Optional: remove from DOM after transition
+    setTimeout(() => {
+      banner.remove();
+    }, 500);
+  }
+});
+
 // Scroll listener removed (handled by Lenis)
 
 document.addEventListener("keydown", (e) => {
