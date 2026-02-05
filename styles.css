@@ -93,45 +93,41 @@ main{ padding-top: var(--topbarH); }
 /* Mobile specific adjustment: Fit to viewport but allow scroll if needed */
 @media (max-width: 767px) {
   .hero {
-    /* Use min-height instead of fixed height to prevent cutting off content on very small screens */
-    min-height: calc(100vh - var(--topbarH));
-    min-height: calc(100dvh - var(--topbarH));
-    height: auto; 
-    padding: 24px var(--pad) 40px; /* Top padding for spacing, bottom for scroll */
-    align-items: flex-start; /* Align content to top instead of center/stretch */
+    height: calc(100svh - var(--topbarH));
+    padding: 24px var(--pad);
+    align-items: center;
   }
   .hero__inner {
-    height: auto; /* Allow natural height */
+    height: 100%;
     width: 100%;
     flex-direction: column;
-    justify-content: flex-start; /* Push content to top */
+    justify-content: center;
     gap: 20px; /* Restored comfortable gap */
   }
   .hero__img {
-    order: 1;
+    order: 2;
     margin: 0;
     flex: 0 0 auto;
     display: flex;
-    justify-content: flex-end; /* Align to right (menu button) */
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     min-height: 0;
     padding-bottom: 0;
     overflow: visible;
   }
   .hero__photo {
-    max-height: 50vh; /* Increased height for better impact */
-    max-width: 90%; /* Prevent full width to keep right-bias visible */
+    max-height: 40vh;
+    max-width: 80%;
     width: auto;
     height: auto;
     object-fit: contain;
-    object-position: center top;
-    margin-right: 8px; /* Align visually with the menu icon */
+    object-position: center;
   }
   .hero__content {
-    order: 2;
-    flex: 0 0 auto; /* Text takes only what it needs */
-    text-align: left;
-    padding-bottom: 10px;
+    order: 1;
+    flex: 0 0 auto;
+    text-align: center;
+    padding-bottom: 0;
   }
   .hero .hero__title {
     font-size: clamp(36px, 8vw, 42px); /* Scaled down from desktop 66px */
@@ -148,7 +144,7 @@ main{ padding-top: var(--topbarH); }
   height: auto;
 }
 .hero{
-  min-height: calc(100vh - var(--topbarH));
+  height: calc(100vh - var(--topbarH));
   display:flex;
   align-items: center;
   padding: 56px var(--pad);
@@ -411,6 +407,9 @@ main{ padding-top: var(--topbarH); }
   padding: 72px var(--pad) 10px var(--pad);
   width: 100%;
   flex: 0 0 auto;
+  position: relative;
+  z-index: 3;
+  background: var(--bg);
 }
 .hscroll__head-inner{
   max-width: 1200px;
@@ -440,6 +439,8 @@ main{ padding-top: var(--topbarH); }
 
   will-change: transform;
   transform: translate3d(0,0,0);
+  position: relative;
+  z-index: 1;
 }
 
 /* Spacer logic via margins - Most robust cross-browser method */
@@ -1512,37 +1513,14 @@ input, button, textarea, select {
   position: relative;
   z-index: 1;
   overflow: hidden;
-  color: #fff; /* White text for contrast */
+  color: #fff; /* White text for contrast by default */
   text-shadow: 0 2px 10px rgba(0,0,0,0.5);
   background: #000; /* Fallback */
-  border: none; /* Remove border if image is there */
+  border: 2px solid #000; /* Match portfolio border */
+  border-radius: var(--radius);
 }
-.card--project h3,
-.card--project p {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-.card--project:hover h3,
-.card--project:hover p,
-.card--project.hover-active h3,
-.card--project.hover-active p {
-  opacity: 1;
-  transform: translateY(0);
-}
-.card--project p {
-  color: rgba(255,255,255,0.9); /* Override muted color */
-}
-.card--project .link {
-  color: #fff;
-  border-bottom-color: rgba(255,255,255,0.5);
-}
-.card--project .pill {
-  background: rgba(255,255,255,0.2);
-  color: #fff;
-  border-color: rgba(255,255,255,0.3);
-  backdrop-filter: blur(4px);
-}
+
+/* Base state: No blur, original colors */
 .card--project::before {
   content: "";
   position: absolute;
@@ -1555,28 +1533,84 @@ input, button, textarea, select {
   will-change: transform, filter;
   transform: translateZ(0); /* Force GPU */
   backface-visibility: hidden;
+  filter: none; /* Original colors */
 }
+
+/* Overlay state: Default dark overlay */
 .card--project::after {
   content: "";
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,0.4); /* Dark overlay */
   z-index: -1;
-  transition: background 0.3s;
+  transition: background 0.4s ease;
 }
 
-/* Hover effects */
+/* Elements state: Hidden by default */
+.card--project h3,
+.card--project p {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  color: #fff; /* White text on dark overlay */
+}
+
+.card--project .link {
+  color: #fff;
+  border-bottom-color: rgba(255,255,255,0.5);
+}
+
+.card--project .pill {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  border-color: rgba(255,255,255,0.3);
+  backdrop-filter: blur(4px);
+}
+
+/* ===== ACTIVE STATE (Hover or Mobile Active) ===== */
+.card--project:hover,
+.card--project.hover-active {
+  /* Match Portfolio Hover Shadow */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Image Blur on Active */
 .card--project:hover::before,
 .card--project.hover-active::before {
-  transform: scale(1.05) translateZ(0); /* Keep GPU active */
+  transform: scale(1.05) translateZ(0);
   filter: blur(8px);
 }
-.card--project:hover::after {
-  background: rgba(0,0,0,0.6); /* Darker on hover to make text pop */
+
+/* White Background Overlay on Active */
+.card--project:hover::after,
+.card--project.hover-active::after {
+  background: rgba(255,255,255,0.95); /* White overlay */
 }
 
-/* Specific Project Overrides */
-/* Nicare specific overrides removed to match other cards (no grayscale) */
+/* Text visibility and color change on Active */
+.card--project:hover h3,
+.card--project:hover p,
+.card--project.hover-active h3,
+.card--project.hover-active p {
+  opacity: 1;
+  transform: translateY(0);
+  color: #000; /* Black text on white overlay */
+  text-shadow: none; /* Remove shadow */
+}
+
+.card--project:hover .link,
+.card--project.hover-active .link {
+  color: #000;
+  border-bottom-color: rgba(0,0,0,0.5);
+}
+
+.card--project:hover .pill,
+.card--project.hover-active .pill {
+  background: rgba(0,0,0,0.08);
+  color: #000;
+  border-color: rgba(0,0,0,0.15);
+  backdrop-filter: none;
+}
 
 /* --- New Download Button Styles (Uiverse Na3ar-17 Adapted) --- */
 .dl-container {

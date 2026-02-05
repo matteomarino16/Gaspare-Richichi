@@ -771,19 +771,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // Mobile Toolkit Click Logic removed
 
   // Mobile Project Hover Effect (IntersectionObserver)
+  // Logic: When card comes into view (even partially before next one), make it active
   if (window.innerWidth < 768) {
     const projectCards = document.querySelectorAll('.card--project');
     
     if (projectCards.length > 0) {
       const observerOptions = {
         root: null, // viewport
-        rootMargin: '0px -15% 0px -15%', // Activate when centered (narrower trigger zone)
-        threshold: 0.6 // 60% visibility required
+        rootMargin: '0px -10% 0px -10%', // Trigger slightly before center
+        threshold: 0.55 // 55% visibility required (trigger earlier than 60%)
       };
 
       const projectObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
+            // Remove active from all others first to ensure clean transition
+            // projectCards.forEach(c => c.classList.remove('hover-active')); 
+            // Note: Multiple can be active if both visible, which is fine
             entry.target.classList.add('hover-active');
           } else {
             entry.target.classList.remove('hover-active');
@@ -793,23 +797,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
       projectCards.forEach(card => projectObserver.observe(card));
     }
+  }
+});
 
-    // CV Button Animation (Removed)
-    /*
-    const cvBtn = document.querySelector('.cv-btn');
-    if (cvBtn) {
-      const cvObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-          } else {
-            entry.target.classList.remove('active');
-          }
-        });
-      }, { threshold: 0.5 });
-      cvObserver.observe(cvBtn);
-    }
-    */
+/* ===== Contact Form Mailto Logic ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  const contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const message = document.getElementById('message').value;
+      
+      const subject = `Nuova richiesta dal sito: ${name}`;
+      const body = `Nome: ${name}%0D%0AEmail: ${email}%0D%0ATelefono: ${phone}%0D%0A%0D%0AMessaggio:%0D%0A${message}`;
+      
+      // Use window.location.href to trigger mail client
+      window.location.href = `mailto:gasparerichichidesign@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    });
   }
 });
 
