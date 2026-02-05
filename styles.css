@@ -1536,12 +1536,12 @@ input, button, textarea, select {
   filter: none; /* Original colors */
 }
 
-/* Overlay state: Default dark overlay */
+/* Overlay state: Transparent by default (original image colors) */
 .card--project::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.4); /* Dark overlay */
+  background: rgba(0,0,0,0); /* Transparent to show original image */
   z-index: -1;
   transition: background 0.4s ease;
 }
