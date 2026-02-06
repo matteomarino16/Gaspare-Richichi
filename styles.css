@@ -952,7 +952,7 @@ input, button, textarea, select {
 
   .hscroll__rail {
     /* Restore horizontal layout padding */
-    padding: 0 0 40px var(--pad);
+    padding: 24px 0 40px var(--pad); /* Added top padding for shadow */
     align-items: stretch; /* Fix: Force equal height for all cards */
   }
 
