@@ -800,26 +800,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-/* ===== Contact Form Mailto Logic ===== */
-document.addEventListener('DOMContentLoaded', () => {
-  const contactForm = document.querySelector('.contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-      const message = document.getElementById('message').value;
-      
-      const subject = `Nuova richiesta dal sito: ${name}`;
-      const body = `Nome: ${name}%0D%0AEmail: ${email}%0D%0ATelefono: ${phone}%0D%0A%0D%0AMessaggio:%0D%0A${message}`;
-      
-      // Use window.location.href to trigger mail client
-      window.location.href = `mailto:gasparerichichidesign@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-    });
-  }
-});
 
 /* ===== Download Button Logic ===== */
 document.addEventListener('DOMContentLoaded', () => {
