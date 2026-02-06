@@ -126,8 +126,9 @@ main{ padding-top: var(--topbarH); }
   .hero__content {
     order: 2; /* Text below image */
     flex: 0 0 auto;
-    text-align: center;
+    text-align: left; /* Left align text */
     padding-bottom: 0;
+    width: 100%; /* Ensure full width for left alignment */
   }
   .hero .hero__title {
     font-size: clamp(36px, 8vw, 42px); /* Scaled down from desktop 66px */
@@ -952,6 +953,7 @@ input, button, textarea, select {
   .hscroll__rail {
     /* Restore horizontal layout padding */
     padding: 0 0 40px var(--pad);
+    align-items: stretch; /* Fix: Force equal height for all cards */
   }
 
   /* 2. Responsive Card Sizing for Horizontal Scroll */
@@ -964,6 +966,7 @@ input, button, textarea, select {
     /* Height is controlled by rail/sticky container */
     padding: 24px;
     aspect-ratio: auto;
+    height: auto; /* Allow stretch to work */
   }
   
   /* 3. Shop Grid - Ensure single column on small screens */
