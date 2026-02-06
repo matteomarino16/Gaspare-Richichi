@@ -116,8 +116,8 @@ main{ padding-top: var(--topbarH); }
     overflow: visible;
   }
   .hero__photo {
-    max-height: 40vh;
-    max-width: 80%;
+    max-height: 55vh; /* Increased from 40vh */
+    max-width: 100%; /* Increased from 80% */
     width: auto;
     height: auto;
     object-fit: contain;
