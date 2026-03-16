@@ -1,84 +1,34 @@
-/**
- * Pinned horizontal section controllata dallo scroll verticale.
- * Logica:
- * - La sezione .hscroll deve avere altezza totale sufficiente a “consumare” lo scroll necessario
- *   per traslare orizzontalmente la rail fino in fondo.
- * - All’interno c’è un contenitore sticky che resta fermo mentre la rail viene traslata in X.
- */
-
 const overlay = document.getElementById("overlay");
 const menuBtn = document.getElementById("menuBtn");
-
-/* ===== Horizontal Scroll Logic (Multi-instance) ===== */
-const scrollers = [];
-let lastWinWidth = window.innerWidth;
-
-class HorizontalSection {
-  constructor(element) {
-    this.section = element;
-    this.sticky = this.section.querySelector(".hscroll__sticky");
-    this.rail = this.section.querySelector(".hscroll__rail");
-    this.maxTranslateX = 0;
-    this.sectionScrollLen = 0;
-    this.sectionTop = 0; // Cache offsetTop
-    
-    // Bind methods
-    this.compute = this.compute.bind(this);
-    this.update = this.update.bind(this);
-  }
-
-  compute() {
-    if (!this.rail || !this.sticky) return;
-    
-    // Cache section top position to avoid layout thrashing in update loop
-    // Note: scrollY is added because getBoundingClientRect is relative to viewport, 
-    // but we need absolute document position or just use offsetTop if parent is relative/body
-    // Using offsetTop is safer if no transforms on parents
-    this.sectionTop = this.section.offsetTop;
-
-    const railWidth = this.rail.scrollWidth;
-    const viewportW = window.innerWidth;
-    
-    this.maxTranslateX = Math.max(0, railWidth - viewportW);
-    this.sectionScrollLen = this.maxTranslateX;
-    
-    // Ensure sticky container has stable height for calculations
-    const stickyH = this.sticky.getBoundingClientRect().height;
-    this.section.style.height = `${stickyH + this.sectionScrollLen}px`;
-    
-    this.update();
-  }
-
-  update(customScrollY) {
-    if (!this.rail) return;
-    
-    const scrollY = customScrollY !== undefined ? customScrollY : window.scrollY;
-    
-    // Use cached sectionTop
-    const raw = (scrollY - this.sectionTop) / (this.sectionScrollLen || 1);
-    const progress = Math.max(0, Math.min(1, raw));
-    
-    // Use floating point for smoother sub-pixel rendering
-    const x = -(progress * this.maxTranslateX);
-    this.rail.style.transform = `translate3d(${x}px,0,0)`;
-  }
-}
-
-function initScrollers() {
-  // Pulisci array se necessario (in caso di re-init dinamico, qui non serve)
-  scrollers.length = 0;
-  document.querySelectorAll(".hscroll").forEach(sec => {
-    const instance = new HorizontalSection(sec);
-    instance.compute();
-    scrollers.push(instance);
-  });
-}
 
 /* ===== Lenis Smooth Scroll ===== */
 // Check if device is mobile
 const isMobile = window.innerWidth < 768;
 
 let lenis;
+
+function initHorizontalRails() {
+  document.querySelectorAll('.hscroll').forEach((section) => {
+    const rail = section.querySelector('.hscroll__rail');
+    if (!rail) return;
+
+    section.addEventListener('wheel', (e) => {
+      if (rail.scrollWidth <= rail.clientWidth + 1) return;
+
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (delta === 0) return;
+
+      const atStart = rail.scrollLeft <= 0;
+      const atEnd = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 1;
+
+      if ((delta < 0 && atStart) || (delta > 0 && atEnd)) return;
+
+      rail.scrollLeft += delta;
+      e.preventDefault();
+      e.stopPropagation();
+    }, { passive: false, capture: true });
+  });
+}
 
 if (!isMobile) {
   lenis = new Lenis({
@@ -95,9 +45,6 @@ if (!isMobile) {
   requestAnimationFrame(raf);
 
   lenis.on('scroll', (e) => {
-    // Update horizontal sections
-    scrollers.forEach(s => s.update(e.scroll));
-    
     // Close overlay if open
     if (overlay && overlay.classList.contains("open")) {
       closeOverlay();
@@ -109,9 +56,6 @@ if (!isMobile) {
   window.addEventListener('scroll', () => {
     if (!ticking) {
       window.requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
-        scrollers.forEach(s => s.update(scrollY));
-        
         // Close overlay if open
         if (overlay && overlay.classList.contains("open")) {
           closeOverlay();
@@ -122,17 +66,7 @@ if (!isMobile) {
     }
   }, { passive: true });
 }
-
-// Optimize resize: only re-compute if width changes (ignores mobile URL bar toggle)
-window.addEventListener("resize", () => {
-  if (window.innerWidth !== lastWinWidth) {
-    lastWinWidth = window.innerWidth;
-    scrollers.forEach(s => s.compute());
-  }
-}, { passive: true });
-
-// Init
-initScrollers();
+initHorizontalRails();
 
 /* ===== Overlay About ===== */
 function openOverlay() {
@@ -251,19 +185,27 @@ const projectData = {
     year: "2022",
     category: "Interior / Branding",
     title: "Nicarè city apartments",
-    images: ["progetti/nicare.png"]
+    images: [
+      "progetti/NICARE/Nicare_1.png",
+      "progetti/NICARE/Nicare_2.png",
+      "progetti/NICARE/Nicare_3.png"
+    ]
   },
   bambu: {
     year: "2025",
     category: "Product",
     title: "Bambù",
-    images: ["progetti/BAMBU.png"]
+    images: [
+      "progetti/BAMBU/BAMBU_1.png",
+      "progetti/BAMBU/BAMBU dettaglio_2.png",
+      "progetti/BAMBU/BAMBU ON_3.png"
+    ]
   },
   discovolante: {
     year: "2025",
     category: "Product",
     title: "Disco Volante",
-    images: ["progetti/DISCO VOLANTE.png"]
+    images: ["progetti/DISCI VOLANTE/DISCO VOLANTE_.png"]
   },
   pescheria: {
     year: "2024",
@@ -276,9 +218,9 @@ const projectData = {
     category: "Product",
     title: "Petit Cadeau",
     images: [
-      "progetti/Petit cadeau.png",
-      "progetti/Petit cadeau 2.png",
-      "progetti/Petit cadeau 3.png"
+      "progetti/PETIT CADEAU/Petit Cadeau_1.png",
+      "progetti/PETIT CADEAU/Petit Cadeau_2.png",
+      "progetti/PETIT CADEAU/Petit Cadeau_3.png"
     ]
   }
 };

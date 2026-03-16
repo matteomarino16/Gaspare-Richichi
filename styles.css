@@ -385,21 +385,17 @@ main{ padding-top: var(--topbarH); }
 }
 .pill--muted{ color: var(--muted); }
 
-/* ===== Sezione pinned orizzontale ===== */
+/* ===== Sezione orizzontale ===== */
 .hscroll{
-  /* l'altezza viene calcolata via JS per creare lo “spazio” di scroll */
   position: relative;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+  background: var(--bg);
 }
 
 .hscroll__sticky{
-  position: sticky;
-  top: var(--topbarH);
-  height: calc(100vh - var(--topbarH));
-  height: calc(100svh - var(--topbarH)); /* Use Small Viewport Height to prevent expansion/stretching on mobile */
-  overflow: hidden; /* importante: nascondi overflow mentre trasliamo */
-  background: var(--bg);
+  position: relative;
+  overflow: visible;
   display: flex;
   flex-direction: column;
 }
@@ -428,25 +424,31 @@ main{ padding-top: var(--topbarH); }
   line-height: 1.5;
 }
 
-/* La rail è una riga orizzontale che trasliamo in X */
+/* La rail è una riga orizzontale scrollabile */
 .hscroll__rail{
   display: flex;
   gap: 0; /* Removing gap to handle spacing via margins manually for robustness */
-  padding: 16px 0 80px var(--pad);
-  flex: 1;
-  min-height: 0;
+  padding: 32px 0 80px var(--pad); /* Increased top padding to prevent shadow clipping */
+  flex: 0 0 auto;
   width: 100%;
-  align-items: center;
-
-  will-change: transform;
-  transform: translate3d(0,0,0);
+  align-items: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: var(--pad);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   position: relative;
   z-index: 1;
+}
+.hscroll__rail::-webkit-scrollbar {
+  display: none;
 }
 
 /* Spacer logic via margins - Most robust cross-browser method */
 .hscroll__rail > * {
   margin-right: var(--gap);
+  scroll-snap-align: start;
 }
 
 /* The last element has NO margin, the spacer handles the end padding */
@@ -628,9 +630,7 @@ input, button, textarea, select {
 
 /* Optimization for horizontal scroll rail */
 .hscroll__rail {
-  will-change: transform;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
+  scroll-behavior: smooth;
 }
 
 /* 1. Scroll Reveal */
